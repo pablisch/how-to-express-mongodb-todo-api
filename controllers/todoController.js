@@ -45,21 +45,27 @@ exports.createTodo = async (req, res, next) => {
   }
 };
 
-// const addTodo = async (req, res, next) => {
-//   const { task } = req.body;
-//   if (!task) return next({ status: 400, message: 'No task was provided.' });
-//   if (typeof task !== 'string') return next({status: 400, message: 'Task must be a string.'})
-//
-//   const addTodoQuery = 'INSERT INTO todos (task, completed) VALUES ($1, false) RETURNING *';
-//
-//   try {
-//     const results = await pool.query(addTodoQuery, [task]);
-//     res.status(201).json(results.rows);
-//   } catch (error) {
-//     next(error);
-//   }
-// };
-//
+exports.deleteTodo = async (req, res, next) => {
+  const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return next({ status: 400, message: `${id} is not a valid todo ID` });
+  }
+
+  try {
+    const todo = await Todo.findByIdAndDelete(id);
+
+    if (!todo) {
+      return next({ status: 404, message: `No todo with ID ${id} was found in the database` });
+    }
+
+    res.status(200).json({ message: `Todo with ID ${id} was successfully deleted` });
+  } catch (error) {
+    next(error);
+  }
+};
+
+
 // const deleteTodo = async (req, res, next) => {
 //   const id = getIdNumber(req);
 //   if (!id) return next({ status: 400, message: 'Invalid id provided. ID must be a number.' });
