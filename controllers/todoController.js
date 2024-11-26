@@ -65,39 +65,31 @@ exports.deleteTodo = async (req, res, next) => {
   }
 };
 
+exports.updateTodo = async (req, res, next) => {
+  const { id } = req.params;
+  const updates = req.body;
 
-// const deleteTodo = async (req, res, next) => {
-//   const id = getIdNumber(req);
-//   if (!id) return next({ status: 400, message: 'Invalid id provided. ID must be a number.' });
-//
-//   const deleteTodoQuery = 'DELETE FROM todos WHERE id = $1 RETURNING *';
-//
-//   try {
-//     const results = await pool.query(deleteTodoQuery, [id]);
-//     if (!results.rows.length) return next({ status: 404, message: `No todo with an ID of ${id} could be found in the database.` });
-//     res.status(200).json(results.rows);
-//   } catch (errro) {
-//     next(error);
-//   }
-// }
-//
-// const updateTodo = async (req, res, next) => {
-//   const id = getIdNumber(req);
-//   if (!id) return next({ status: 400, message: 'Invalid id provided. ID must be a number.' });
-//
-//   const { task, completed } = req.body;
-//   if (!task || !completed && completed !== false) return next({ status: 400, message: 'Task and completed properties are required to update this todo.' });
-//   if (typeof completed !== 'boolean') return next({status: 400, message: 'The completed property must be of type boolean.'})
-//   if (typeof task !== 'string') return next({status: 400, message: 'The task property must be of type string.'})
-//
-//   const updateTodoQuery = 'UPDATE todos SET task = $1, completed = $2 WHERE id = $3 RETURNING *';
-//
-//   try {
-//     const results = await pool.query(updateTodoQuery, [task, completed, id]);
-//     if (!results.rows.length) return next({ status: 404, message: `No todo with an ID of ${id} could be found in the database.` });
-//     res.status(201).json(results.rows);
-//   } catch (error) {
-//     next (error)
-//   }
-// }
-//
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return next({ status: 400, message: `${id} is not a valid todo ID` });
+  }
+
+  try {
+    if (!updates || typeof updates !== 'object' || Array.isArray(updates)) {
+      return next({ status: 400, message: 'Updates must be an object' });
+    }
+
+    const todo = await Todo.findByIdAndUpdate(
+        id,
+        updates,
+        { new: true, runValidators: true }
+    );
+
+    if (!todo) {
+      return next({ status: 404, message: `No todo with ID ${id} was found in the database` });
+    }
+
+    res.status(200).json(todo);
+  } catch (error) {
+    next(error);
+  }
+};
