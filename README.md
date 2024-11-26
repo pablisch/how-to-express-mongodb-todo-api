@@ -1,21 +1,27 @@
-# How to build an Express Todo API with PostgreSQL Database setup
+# How to build an Express Todo API with MongoDB Atlas Database setup
 
-* This project is simply to outline the processes involved in setting up an Express API with a PostgreSQL database.
+* This project is simply to outline the processes involved in setting up an Express API with a MongoDB Atlas database.
 * This example uses `todos` but the principle is the same for any API.
-* Code files included are purely intended as a comprehenisve example of the instructions provided in this README.md file.
-* The order in which the API and database are made are optional. These instructions provide one possible order.
+* Code files included are purely intended as an example of the instructions provided in this README.md file and the accompanying markdown instruction files in [howTo](howTo).
+* The order in which much of the API and database instructions are carried is largely optional. These instructions provide one possible order.
 
 ## Set up
 
-The purpose of this project is a README guide, not to run the API, but should you wish to then follow these steps:
+The purpose of this project as a guide, not to run the API, but should you wish to run the API included in this repo, then follow these steps:
 * Clone this repository.
 * Run `npm install` to install the dependencies.
 * Create a `.env` file in the root of the project and add the following environment variables:
-  * `DB_USERNAME=your_username`
-  * `DB_PASSWORD=your_password`
-* Replace `your_username` and `your_password` with your PostgreSQL username and password.
-* Create a database called `todolist` in PostgreSQL.
+  * `MONGODB_USERNAME=<your-username>`
+  * `MONGODB_PASSWORD=<your-password>`
+  * `MONGODB_DATABASE_NAME=<your-database-name>`
+  * `MONGODB_CLUSTER_REF=<your-cluster-reference>` e.g. cluster0.kdyng
+* NOTE: this requires a MongoDB Atlas database instance
+* Replace `MONGODB_USERNAME`, `MONGODB_PASSWORD`, `MONGODB_DATABASE_NAME` and `MONGODB_CLUSTER_REF` with your Mongo DB Atlas details.
+* Create a database called `todo_DEV` in MongoDB Atlas.
+
+[//]: # (TODO reconcile the seeding instruction below with MongoDB)
 * Run the `tables.sql` and `seeds.sql` files in the `db` folder to create the tables and seed the database.
+* 
 * Run `npm start` to start the server.
 * Use a tool like Postman to make requests to the API.
 * Run `npm test` to run the tests.
@@ -138,7 +144,7 @@ DATABASE_PASSWORD=your_password
 
 ### Setup database connection
 
-In the db.js file, create a connection to the PostgreSQL database. For example:
+[//]: # (In the db.js file, create a connection to the PostgreSQL database. For example:)
 ```
 require('dotenv').config();
 const { Pool } = require('pg');
@@ -260,7 +266,7 @@ This can be tested in the browser or using a tool like Postman by making a `GET`
 ### Import pool into app.js
 
 ```javascript
-const pool = require('./db');
+// const pool = require('./db');
 ```
 
 ### Create the todo route in app.js
@@ -392,7 +398,7 @@ app.use('/todos', todoRoutes);
 
 Remove these snippets of old todo route from app.js:
 ```javascript
-const pool = require('./db');
+// const pool = require('./db');
 ```
 and
 ```javascript
