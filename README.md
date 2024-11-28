@@ -28,6 +28,15 @@ The purpose of this project as a guide, not to run the API, but should you wish 
 
 ## Contents
 
+1. [Setting up a MongoDB database and connecting to MongoDB Compass](howTo/1.setUpMongoDbDatabase)
+2. [Setting up the repository](howTo/2.SetUpTheRepository.md)
+3. [Setting up a basic Express server](howTo/3.SettingUpTheExpressServer.md)
+
+- Basic step-by-step server setup building up top controllers
+
+- Straight to controllers and routes
+
+
 1. [Setting up the repository](#setting-up-the-repository)
 2. [Setting up the database](#setting-up-the-database)
 3. [Prepare for using the database in the API](#prepare-for-using-the-database-in-the-api)

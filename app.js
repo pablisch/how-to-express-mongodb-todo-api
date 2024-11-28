@@ -3,6 +3,7 @@ require('dotenv').config();
 const todoRoutes = require('./routes/todoRoutes')
 const mongoose = require("mongoose");
 const cors = require('cors');
+const Todo = require("./models/todo");
 
 const dbPassword = process.env.MONGODB_PASSWORD;
 const dbUser = process.env.MONGODB_USERNAME;
@@ -27,7 +28,7 @@ mongoose
     .connect(mongoDbUri)
     .then(() => {
       console.log(
-          `🥳 Successfully connected to MongoDB Atlas ${dbName} database! 🌎`
+          // `🥳 Successfully connected to MongoDB Atlas ${dbName} database! 🌎`
       )
     })
     .catch((error) => {
@@ -36,6 +37,15 @@ mongoose
     })
 
 app.use(express.json())
+
+// app.get("/todos", async (req, res, next) => {
+//     try {
+//         const todos = await Todo.find()
+//         res.status(200).json(todos)
+//     } catch (error) {
+//         next(error)
+//     }
+// })
 
 app.use('/todos', todoRoutes)
 
