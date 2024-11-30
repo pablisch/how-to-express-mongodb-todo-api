@@ -1,6 +1,6 @@
 const seedTodosForTests = require('../seed/seedTodosForTests')
-const { getAllTodos } = require('./todoController');
-// const { getAllTodos, getTodoById, addTodo, deleteTodo, updateTodo } = require('./todoController');
+const { getAllTodos, getTodoById, createTodo, deleteTodo, updateTodo } = require('./todoController')
+const Todo = require('../models/todo')
 
 describe('Todo routes controller functions unit tests', () => {
 
@@ -25,250 +25,388 @@ describe('Todo routes controller functions unit tests', () => {
       expect(mRes.status).toBeCalledWith(200);
       const todos = mRes.json.mock.calls[0][0]
 
-
       expect(todos.length).toBe(3);
       expect(todos[0].task).toBe('Eat');
       expect(todos[0]).toMatchObject({ task: 'Eat', completed: true });
       expect(todos[1]).toMatchObject({ task: 'Sleep', completed: false })
       expect(todos[2]).toMatchObject({ task: 'Pray', completed: false })
+
+      const now = Date.now()
+      todos.forEach(todo => {
+        expect(todo).toHaveProperty('_id')
+        expect(todo._id.toString()).toMatch(/^[a-f\d]{24}$/i)
+        expect(todo).toHaveProperty('createdAt')
+        expect(todo).toHaveProperty('updatedAt')
+        expect(new Date(todo.createdAt).getTime() < now)
+        expect(new Date(todo.updatedAt).getTime() < now)
+      })
     })
   })
 
-  // describe('getTodoById()', () => {
-  //   test.each([
-  //     [1, 'Eat', true],
-  //     [2, 'Sleep', false],
-  //     [3, 'Pray', false],
-  //   ])('should return an array with a single todo object and status 200 when called with the id param of %s', async (id, task, completed) => {
-  //     // Arrange
-  //     const mReq = {
-  //       params: {
-  //         id
-  //       }
-  //     };
-  //     const mRes = {
-  //       status: jest.fn().mockReturnThis(),
-  //       json: jest.fn()
-  //     };
-  //     const mNext = jest.fn();
-  //
-  //     // Act
-  //     await getTodoById(mReq, mRes, mNext);
-  //
-  //     // Assert
-  //     expect(mRes.status).toBeCalledWith(200);
-  //     expect(mRes.json.mock.calls[0][0].length).toBe(1);
-  //     expect(mRes.json.mock.calls[0][0][0].id).toBe(id);
-  //     expect(mRes.json.mock.calls[0][0][0].task).toBe(task);
-  //     expect(mRes.json.mock.calls[0][0][0].completed).toBe(completed);
-  //     expect(mRes.json).toBeCalledWith([{ id, task, completed }])
-  //   })
-  //
-  //   test.each([
-  //     [2000, 404, 'No todo with an ID of 2000 could be found in the database.'],
-  //     ['dog', 400, 'Invalid id provided. ID must be a number.'],
-  //     [true, 400, 'Invalid id provided. ID must be a number.'],
-  //   ])('should return an appropriate status and error message when called with an ID param of %s', async (id, status, errorMessage) => {
-  //     // Arrange
-  //     const mReq = {
-  //       params: {
-  //         id
-  //       }
-  //     };
-  //     const mRes = {
-  //       status: jest.fn().mockReturnThis(),
-  //       json: jest.fn()
-  //     };
-  //     const mNext = jest.fn();
-  //
-  //     // Act
-  //     await getTodoById(mReq, mRes, mNext);
-  //
-  //     // Assert
-  //     expect(mRes.status).not.toHaveBeenCalled();
-  //     expect(mNext).toHaveBeenCalledWith({ status, message: errorMessage })
-  //     expect(mNext.mock.calls[0][0].status).toBe(status);
-  //     expect(mNext.mock.calls[0][0].message).toBe(errorMessage);
-  //   })
-  // });
-  //
-  // describe('addTodo()', () => {
-  //   test.each(['Climb', 'Swim', 'Climb a tree'])('should add a todo to the database and return an array with the added todo and status 201', async (task) => {
-  //     // Arrange
-  //     const mReq = {
-  //       body: {
-  //         task
-  //       }
-  //     };
-  //     const mRes = {
-  //       status: jest.fn().mockReturnThis(),
-  //       json: jest.fn()
-  //     };
-  //     const mNext = jest.fn();
-  //
-  //     // Act
-  //     await addTodo(mReq, mRes, mNext);
-  //
-  //     // Assert
-  //     expect(mRes.status).toHaveBeenCalledWith(201);
-  //     expect(mRes.json.mock.calls[0][0].length).toBe(1);
-  //     expect(mRes.json.mock.calls[0][0][0].task).toBe(task);
-  //     expect(mRes.json.mock.calls[0][0][0].completed).toBe(false);
-  //   })
-  // })
-  //
-  // test.each([
-  //   [undefined, 'No task was provided.'],
-  //   ['', 'No task was provided.'],
-  //   [212, 'Task must be a string.'],
-  //   [true, 'Task must be a string.'],
-  // ])('should return status 400 and an appropriate error message when passed task, "%s" in the request body', async (task, errorMessage) => {
-  //   // Arrange
-  //   const mReq = {
-  //     body: {
-  //       task
-  //     }
-  //   };
-  //   const mRes = {
-  //     status: jest.fn().mockReturnThis(),
-  //     json: jest.fn()
-  //   };
-  //   const mNext = jest.fn();
-  //
-  //   // Act
-  //   await addTodo(mReq, mRes, mNext);
-  //
-  //   // Assert
-  //   expect(mRes.status).not.toHaveBeenCalled();
-  //   expect(mNext).toHaveBeenCalledWith({ status: 400, message: errorMessage });
-  //   expect(mNext.mock.calls[0][0].status).toBe(400);
-  //   expect(mNext.mock.calls[0][0].message).toBe(errorMessage);
-  // })
-  //
-  // describe('deleteTodo()', () => {
-  //   test.each([
-  //     [1, 'Eat', true],
-  //     [2, 'Sleep', false],
-  //     [3, 'Pray', false]
-  //   ])('should delete todo with id %s from the database and return status 200 and an array contianing only the deleted todo object', async (id, task, completed) => {
-  //     // Arrange
-  //     const mReq = {
-  //       params: {
-  //         id
-  //       }
-  //     };
-  //     const mRes = {
-  //       status: jest.fn().mockReturnThis(),
-  //       json: jest.fn()
-  //     };
-  //     const mNext = jest.fn();
-  //
-  //     // Act
-  //     await deleteTodo(mReq, mRes, mNext);
-  //
-  //     // Assert
-  //     expect(mRes.status).toHaveBeenCalledWith(200);
-  //     expect(mRes.json).toHaveBeenCalledWith([{ id, task, completed }]);
-  //     expect(mRes.json.mock.calls[0][0].length).toBe(1);
-  //     expect(mRes.json.mock.calls[0][0][0].task).toBe(task)
-  //   })
-  //
-  //   test.each([
-  //     ['cat', 400, 'Invalid id provided. ID must be a number.'],
-  //     [true, 400, 'Invalid id provided. ID must be a number.'],
-  //     [2000, 404, 'No todo with an ID of 2000 could be found in the database.'],
-  //   ])('should return an appropriate status and error message when passed params ID of "%s"', async (id, status, errorMessage) => {
-  //     // Arrange
-  //     const mReq = {
-  //       params: {
-  //         id
-  //       }
-  //     };
-  //     const mRes = {
-  //       status: jest.fn().mockReturnThis(),
-  //       json: jest.fn()
-  //     };
-  //     const mNext = jest.fn();
-  //
-  //     // Act
-  //     await deleteTodo(mReq, mRes, mNext);
-  //
-  //     // Assert
-  //     expect(mRes.status).not.toHaveBeenCalled();
-  //     expect(mNext).toHaveBeenCalledWith({ status, message: errorMessage });
-  //     expect(mNext.mock.calls[0][0].status).toBe(status);
-  //     expect(mNext.mock.calls[0][0].message).toBe(errorMessage);
-  //   })
-  // })
-  //
-  // describe('updateTodo()', () => {
-  //   test.each([
-  //     [1, "Jump", false],
-  //     [2, "Dream", true],
-  //     [1, "Swim", true],
-  //   ])('should update todo in the database and return status 201 and the updated todo object', async (id, task, completed) => {
-  //     // Arrange
-  //     const mReq = {
-  //       params: {
-  //         id
-  //       },
-  //       body: {
-  //         task, completed
-  //       }
-  //     };
-  //     const mRes = {
-  //       status: jest.fn().mockReturnThis(),
-  //       json: jest.fn()
-  //     };
-  //     const mNext = jest.fn();
-  //
-  //     // Act
-  //     await updateTodo(mReq, mRes, mNext);
-  //
-  //     // Assert
-  //     expect(mRes.status).toHaveBeenCalledWith(201);
-  //     expect(mRes.json).toHaveBeenCalledWith([{ id, task, completed }]);
-  //     expect(mRes.json.mock.calls[0][0].length).toBe(1);
-  //     expect(mRes.json.mock.calls[0][0][0].id).toBe(id);
-  //     expect(mRes.json.mock.calls[0][0][0].task).toBe(task);
-  //     expect(mRes.json.mock.calls[0][0][0].completed).toBe(completed);
-  //   })
-  //
-  //   test.each([
-  //     [1, '', false, 400, 'Task and completed properties are required to update this todo.'],
-  //     [2, 'Dream', undefined, 400, 'Task and completed properties are required to update this todo.'],
-  //     [3, 'Dream', 'fish', 400, 'The completed property must be of type boolean.'],
-  //     [1, 'Dream', 212, 400, 'The completed property must be of type boolean.'],
-  //     [2, true, true, 400, 'The task property must be of type string.'],
-  //     [3, 212, true, 400, 'The task property must be of type string.'],
-  //     [3000, 'Fly', 'pig', 400, 'The completed property must be of type boolean.'],
-  //     ['cat', 'Fly', true, 400, 'Invalid id provided. ID must be a number.'],
-  //     [3000, 'Fly', true, 404, 'No todo with an ID of 3000 could be found in the database.'],
-  //   ])('should return an appropriate status and error message for todo with id of "%s", task "%s" and completed property "%s"', async (id, task, completed, status, errorMessage) => {
-  //     // Arrange
-  //     const mReq = {
-  //       params: {
-  //         id
-  //       },
-  //       body: {
-  //         task, completed
-  //       }
-  //     };
-  //     const mRes = {
-  //       status: jest.fn().mockReturnThis(),
-  //       json: jest.fn()
-  //     };
-  //     const mNext = jest.fn();
-  //
-  //     // Act
-  //     await updateTodo(mReq, mRes, mNext);
-  //
-  //     // Assert
-  //     expect(mRes.status).not.toHaveBeenCalled();
-  //     expect(mNext).toHaveBeenCalledWith({ status, message: errorMessage });
-  //     expect(mNext.mock.calls[0][0]).toEqual({ status, message: errorMessage });
-  //     expect(mNext.mock.calls[0][0].status).toBe(status);
-  //     expect(mNext.mock.calls[0][0].message).toBe(errorMessage);
-  //   })
-  // })
+  describe('getTodoById()', () => {
+    test.each([
+      ['123456789012345678901234', 'Eat', true],
+      ['234567890123456789012345', 'Sleep', false],
+      ['345678901234567890123456', 'Pray', false],
+    ])('should return an array with a single todo object and status 200 when called with the id param of %s', async (id, task, completed) => {
+      // Arrange
+      const mReq = {
+        params: {
+          id
+        }
+      };
+      const mRes = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn()
+      };
+      const mNext = jest.fn();
+
+      // Act
+      await getTodoById(mReq, mRes, mNext);
+
+      // Assert
+      expect(mRes.status).toBeCalledWith(200);
+      const todo = mRes.json.mock.calls[0][0]
+      expect((todo._id).toString()).toBe(id)
+      expect(todo.task).toBe(task)
+      expect(todo.completed).toBe(completed)
+      expect(todo.createdAt).toBeInstanceOf(Date)
+      expect(todo.updatedAt).toBeInstanceOf(Date)
+      expect(todo.__v).toBe(0)
+    })
+
+    test.each([
+      ['999999999999999999999999', 404, 'No todo with ID 999999999999999999999999 was found in the database'],
+      ['dog', 400, `'dog' is not a valid todo ID`],
+      [true, 400, `'true' is not a valid todo ID`],
+    ])('should return an appropriate status and error message when called with an ID param of %s', async (id, status, errorMessage) => {
+      // Arrange
+      const mReq = {
+        params: {
+          id
+        }
+      };
+      const mRes = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn()
+      };
+      const mNext = jest.fn();
+
+      // Act
+      await getTodoById(mReq, mRes, mNext);
+
+      // Assert
+      expect(mRes.status).not.toHaveBeenCalled();
+      expect(mNext).toHaveBeenCalledWith({ status, message: errorMessage })
+      const todoCall = mNext.mock.calls[0][0]
+      expect(todoCall.status).toBe(status);
+      expect(todoCall.message).toBe(errorMessage);
+    })
+  });
+
+  describe('createTodo()', () => {
+    test.each(['Climb', 'Swim', 'Climb a tree'])('should add a todo to the database and return an array with the added todo and status 201', async (task) => {
+      // Arrange
+      const mReq = {
+        body: {
+          task
+        }
+      }
+      const mRes = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn()
+      }
+      const mNext = jest.fn()
+
+      // Act
+      await createTodo(mReq, mRes, mNext)
+
+      // Assert
+      expect(mRes.status).toHaveBeenCalledWith(201)
+      const newTodo = mRes.json.mock.calls[0][0]
+      expect(newTodo.task).toBe(task)
+      expect(newTodo.completed).toBe(false)
+    })
+
+    test.each([
+      [undefined, 'No task was provided'],
+      ['', 'No task was provided'],
+      [212, 'Task must be a string but a number was given'],
+      [true, 'Task must be a string but a boolean was given'],
+    ])('should return status 400 and an appropriate error message when passed task, "%s" in the request body', async (task, errorMessage) => {
+      // Arrange
+      const mReq = {
+        body: {
+          task
+        }
+      };
+      const mRes = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn()
+      };
+      const mNext = jest.fn();
+
+      // Act
+      await createTodo(mReq, mRes, mNext);
+
+      // Assert
+      expect(mRes.status).not.toHaveBeenCalled()
+      expect(mNext).toHaveBeenCalledWith({ status: 400, message: errorMessage })
+      const createTodoCall = mNext.mock.calls[0][0]
+      expect(createTodoCall.status).toBe(400)
+      expect(createTodoCall.message).toBe(errorMessage)
+    })
+  })
+
+  describe('deleteTodo()', () => {
+    test.each([
+      ['123456789012345678901234', 'Eat', true],
+      ['234567890123456789012345', 'Sleep', false],
+      ['345678901234567890123456', 'Pray', false]
+    ])('should delete todo with id %s from the database and return status 200 and an array contianing only the deleted todo object', async (id, task, completed) => {
+      // Arrange
+      const mReq = {
+        params: {
+          id
+        }
+      };
+      const mRes = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn()
+      };
+      const mNext = jest.fn();
+
+      // Act
+      await deleteTodo(mReq, mRes, mNext);
+
+      // Assert
+      expect(mRes.status).toHaveBeenCalledWith(204);
+      expect(mRes.json).toHaveBeenCalledWith({"message": `Todo with ID ${id} was successfully deleted`})
+
+      // Act
+      // const todo = await Todo.findById(id)
+      //
+      // // Assert
+      // expect(todo).toBeNull()
+    })
+
+    test.each([
+      ['999999999999999999999999', 404, 'No todo with ID 999999999999999999999999 was found in the database'],
+      ['cat', 400, `'cat' is not a valid todo ID`],
+      [true, 400, `'true' is not a valid todo ID`],
+    ])('should return an appropriate status and error message when passed params ID of "%s"', async (id, status, errorMessage) => {
+      // Arrange
+      const mReq = {
+        params: {
+          id
+        }
+      };
+      const mRes = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn()
+      };
+      const mNext = jest.fn();
+
+      // Act
+      await deleteTodo(mReq, mRes, mNext)
+
+      // Assert
+      expect(mRes.status).not.toHaveBeenCalled()
+      expect(mNext).toHaveBeenCalledWith({ status, message: errorMessage })
+      expect(mNext.mock.calls[0][0].status).toBe(status)
+      expect(mNext.mock.calls[0][0].message).toBe(errorMessage)
+    })
+  })
+
+  describe('updateTodo()', () => {
+    test.each([
+      ['123456789012345678901234', "Jump", false],
+      ['234567890123456789012345', "Dream", true],
+      ['345678901234567890123456', "Swim", true],
+    ])('should update todo with ID %s in the database and return status 200 and the updated todo object where ALL properties are passed in', async (id, task, completed) => {
+      // Arrange
+      const mReq = {
+        params: {
+          id
+        },
+        body: {
+          task, completed
+        }
+      };
+      const mRes = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn()
+      };
+      const mNext = jest.fn();
+
+      // Act
+      await updateTodo(mReq, mRes, mNext);
+
+      // Assert
+      expect(mRes.status).toHaveBeenCalledWith(200)
+      const updatedTodo = mRes.json.mock.calls[0][0]
+      expect((updatedTodo._id).toString()).toBe(id);
+      expect(updatedTodo.task).toBe(task);
+      expect(updatedTodo.completed).toBe(completed);
+    })
+
+    test.each([
+      ['123456789012345678901234', "Jump", true],
+      ['234567890123456789012345', "Dream", false],
+      ['345678901234567890123456', "Swim", false],
+    ])('should update todo with ID %s in the database and return status 200 and the updated todo object where ONLY the task property is passed in', async (id, task, completed) => {
+      // Arrange
+      const mReq = {
+        params: {
+          id
+        },
+        body: {
+          task
+        }
+      };
+      const mRes = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn()
+      };
+      const mNext = jest.fn();
+
+      // Act
+      await updateTodo(mReq, mRes, mNext);
+
+      // Assert
+      expect(mRes.status).toHaveBeenCalledWith(200)
+      const updatedTodo = mRes.json.mock.calls[0][0]
+      expect((updatedTodo._id).toString()).toBe(id);
+      expect(updatedTodo.task).toBe(task);
+      expect(updatedTodo.completed).toBe(completed);
+    })
+
+    test.each([
+      ['123456789012345678901234', "Eat", false],
+      ['234567890123456789012345', "Sleep", true],
+      ['345678901234567890123456', "Pray", true],
+    ])('should update todo with ID %s in the database and return status 200 and the updated todo object where ONLY the completed property is passed in', async (id, task, completed) => {
+      // Arrange
+      const mReq = {
+        params: {
+          id
+        },
+        body: {
+          completed
+        }
+      };
+      const mRes = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn()
+      };
+      const mNext = jest.fn();
+
+      // Act
+      await updateTodo(mReq, mRes, mNext);
+
+      // Assert
+      expect(mRes.status).toHaveBeenCalledWith(200)
+      const updatedTodo = mRes.json.mock.calls[0][0]
+      expect((updatedTodo._id).toString()).toBe(id);
+      expect(updatedTodo.task).toBe(task);
+      expect(updatedTodo.completed).toBe(completed);
+    })
+
+    test.each([
+      ['123456789012345678901234', '', false, 400, 'Task cannot be an empty string. If a task property is sent, it must be a valid string'],
+      ['234567890123456789012345', true, true, 400, 'Task property must be a string. Received type boolean'],
+      ['345678901234567890123456', 400, true, 400, 'Task property must be a string. Received type number'],
+      ['123456789012345678901234', ["Hello world"], true, 400, 'Task property must be a string. Received type object'],
+      ['234567890123456789012345', 'Dream', 'true', 400, 'Completed property must be a Boolean. Received type string'],
+      ['345678901234567890123456', 'Dream', 400, 400, 'Completed property must be a Boolean. Received type number'],
+      ['123456789012345678901234', 'Dream', [true], 400, 'Completed property must be a Boolean. Received type object'],
+      ['cat', 'Fly', true, 400, "'cat' is not a valid todo ID"],
+      ['999999999999999999999999', 'Fly', true, 404, 'No todo with ID 999999999999999999999999 was found in the database'],
+    ])('should return an appropriate status and error message for todo with id of "%s", task "%s" and completed property "%s"', async (id, task, completed, status, errorMessage) => {
+      // Arrange
+      const mReq = {
+        params: {
+          id
+        },
+        body: {
+          task,
+          completed,
+        }
+      };
+      const mRes = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn()
+      };
+      const mNext = jest.fn();
+
+      // Act
+      await updateTodo(mReq, mRes, mNext);
+
+      // Assert
+      expect(mRes.status).not.toHaveBeenCalled()
+      expect(mNext).toHaveBeenCalledWith({ status, message: errorMessage })
+      expect(mNext.mock.calls[0][0]).toEqual({ status, message: errorMessage })
+      expect(mNext.mock.calls[0][0].status).toBe(status)
+      expect(mNext.mock.calls[0][0].message).toBe(errorMessage)
+    })
+
+    test.each([
+      ['123456789012345678901234', '', 400, 'Task cannot be an empty string. If a task property is sent, it must be a valid string'],
+      ['234567890123456789012345', true, 400, 'Task property must be a string. Received type boolean'],
+      ['345678901234567890123456', 400, 400, 'Task property must be a string. Received type number'],
+      ['123456789012345678901234', ["Hello world"], 400, 'Task property must be a string. Received type object'],
+    ])('should return an appropriate status and error message for todo with id of "%s" when only task "%s" is passed in', async (id, task, status, errorMessage) => {
+      // Arrange
+      const mReq = {
+        params: {
+          id
+        },
+        body: {
+          task,
+        }
+      };
+      const mRes = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn()
+      };
+      const mNext = jest.fn();
+
+      // Act
+      await updateTodo(mReq, mRes, mNext);
+
+      // Assert
+      expect(mRes.status).not.toHaveBeenCalled()
+      expect(mNext).toHaveBeenCalledWith({ status, message: errorMessage })
+      expect(mNext.mock.calls[0][0]).toEqual({ status, message: errorMessage })
+    })
+
+    test.each([
+      ['234567890123456789012345', 'true', 400, 'Completed property must be a Boolean. Received type string'],
+      ['345678901234567890123456', 400, 400, 'Completed property must be a Boolean. Received type number'],
+      ['123456789012345678901234', [true], 400, 'Completed property must be a Boolean. Received type object'],
+    ])('should return an appropriate status and error message for todo with id of "%s" when only completed property "%s" is passed in', async (id, completed, status, errorMessage) => {
+      // Arrange
+      const mReq = {
+        params: {
+          id
+        },
+        body: {
+          completed,
+        }
+      };
+      const mRes = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn()
+      };
+      const mNext = jest.fn();
+
+      // Act
+      await updateTodo(mReq, mRes, mNext);
+
+      // Assert
+      expect(mRes.status).not.toHaveBeenCalled()
+      expect(mNext).toHaveBeenCalledWith({ status, message: errorMessage })
+      expect(mNext.mock.calls[0][0]).toEqual({ status, message: errorMessage })
+    })
+  })
 })

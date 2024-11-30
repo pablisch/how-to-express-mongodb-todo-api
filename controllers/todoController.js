@@ -12,11 +12,11 @@ exports.getAllTodos = async (req, res, next) => {
 
 exports.getTodoById = async (req, res, next) => {
   const { id } = req.params;
-  if (!mongoose.Types.ObjectId.isValid(id)) return next({ status: 400, message: `${id} is not a valid todo ID` })
+  if (!mongoose.Types.ObjectId.isValid(id)) return next({ status: 400, message: `'${id}' is not a valid todo ID` })
   try {
     const todo = await Todo.findById(id);
     if (!todo) {
-      return next({ status: 404, error: `No todo with ID ${id} was found in the database` })
+      return next({ status: 404, message: `No todo with ID ${id} was found in the database` })
     }
     res.status(200).json(todo);
   } catch (error) {
@@ -26,7 +26,7 @@ exports.getTodoById = async (req, res, next) => {
 
 exports.createTodo = async (req, res, next) => {
   const { task } = req.body;
-  if (!task) return next({ status: 400, message: `No task was given` })
+  if (!task) return next({ status: 400, message: `No task was provided` })
   if (typeof task !== 'string') return next({status: 400, message: `Task must be a string but a ${typeof(task)} was given`})
   const todo = new Todo({
     task,
@@ -43,28 +43,31 @@ exports.createTodo = async (req, res, next) => {
 exports.deleteTodo = async (req, res, next) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    return next({ status: 400, message: `${id} is not a valid todo ID` });
+    return next({ status: 400, message: `'${id}' is not a valid todo ID` });
   }
   try {
     const todo = await Todo.findByIdAndDelete(id);
     if (!todo) {
       return next({ status: 404, message: `No todo with ID ${id} was found in the database` });
     }
-    res.status(200).json({ message: `Todo with ID ${id} was successfully deleted` });
+    res.status(204).json({ message: `Todo with ID ${id} was successfully deleted` });
   } catch (error) {
     next(error);
   }
 };
 
 exports.updateTodo = async (req, res, next) => {
-  const { id } = req.params;
-  const updates = req.body;
+  const { id } = req.params
+  const updates = req.body
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    return next({ status: 400, message: `${id} is not a valid todo ID` });
+    return next({ status: 400, message: `'${id}' is not a valid todo ID` })
   }
   if (!updates || typeof updates !== 'object' || Array.isArray(updates)) {
-    return next({ status: 400, message: 'Updates must be an object' });
+    return next({ status: 400, message: 'Updates must be an object' })
   }
+  if (updates?.task === '') return next({ status: 400, message: 'Task cannot be an empty string. If a task property is sent, it must be a valid string' })
+  if (updates?.task && typeof(updates?.task) !== "string") return next({ status: 400, message: `Task property must be a string. Received type ${typeof(updates?.task)}` })
+  if (updates?.completed && typeof(updates?.completed) !== "boolean") return next({ status: 400, message: `Completed property must be a Boolean. Received type ${typeof(updates?.completed)}` })
   try {
     const todo = await Todo.findByIdAndUpdate(
         id,
