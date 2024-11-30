@@ -32,10 +32,16 @@ The purpose of this project as a guide, not to run the API, but should you wish 
 2. [Setting up the repository](howTo/2.SetUpTheRepository.md)
 3. [Setting up a basic Express server](howTo/3.SettingUpTheExpressServer.md)
 
-- Basic step-by-step server setup building up top controllers
 
-- Straight to controllers and routes
+   Basic step-by-step server setup leading up top controllers
+   4. [Add a basic GET /todos endpoint in app.js](howTo/4.AddTheGetTodosEndpoint.md)
+   5. [Refactor the GET /todos endpoint into a controller function and route](howTo/5.RefactorGetTodosWithControllerFunction.md)
 
+Straight to controllers and routes
+6. [Add the GET /todos endpoint (as controller function and route](howTo/6.AddGetTodosEndpointAsControllerAndRoute.md)
+
+
+7. [GET /todos controller function unit test](howTo/7.GetTodosControllerUnitTest.md)
 
 1. [Setting up the repository](#setting-up-the-repository)
 2. [Setting up the database](#setting-up-the-database)
@@ -384,7 +390,7 @@ const { getAllTodos } = require('../controllers/todoController');
 module.exports = router;
 ```
 
-Betweeen the imports and export, add the first route:
+Between the imports and export, add the first route:
 ```javascript
 router.get('/', getAllTodos);
 ```

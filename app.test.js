@@ -3,7 +3,6 @@ const app = require('./app');
 const seedTodosForTests = require('./seed/seedTodosForTests')
 
 describe('App todo endpoint integration tests', () => {
-
   beforeEach(async () => {
     await seedTodosForTests();
   });

@@ -27,9 +27,9 @@ app.use(cors());
 mongoose
     .connect(mongoDbUri)
     .then(() => {
-      console.log(
+      // console.log(
           // `🥳 Successfully connected to MongoDB Atlas ${dbName} database! 🌎`
-      )
+      // )
     })
     .catch((error) => {
       console.log(`😖 Unable to connect to MongoDB Atlas ${dbName} database! ❌`);
@@ -37,15 +37,6 @@ mongoose
     })
 
 app.use(express.json())
-
-// app.get("/todos", async (req, res, next) => {
-//     try {
-//         const todos = await Todo.find()
-//         res.status(200).json(todos)
-//     } catch (error) {
-//         next(error)
-//     }
-// })
 
 app.use('/todos', todoRoutes)
 

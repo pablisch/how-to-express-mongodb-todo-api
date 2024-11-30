@@ -1,30 +1,36 @@
 const seedTodosForTests = require('../seed/seedTodosForTests')
-const { getAllTodos, getTodoById, addTodo, deleteTodo, updateTodo } = require('./todoController');
+const { getAllTodos } = require('./todoController');
+// const { getAllTodos, getTodoById, addTodo, deleteTodo, updateTodo } = require('./todoController');
 
 describe('Todo routes controller functions unit tests', () => {
 
   beforeEach( async () => {
-    // await seedTodos();
+    await seedTodosForTests()
   });
 
   describe('getAllTodos()', () => {
     test('should return an array of all todo objects and status 200', async () => {
       // Arrange
-      // const mReq = {};
-      // const mRes = {
-      //   status: jest.fn().mockReturnThis(),
-      //   json: jest.fn()
-      // }
-      // const mNext = jest.fn();
-      //
-      // // Act
-      // await getAllTodos(mReq, mRes, mNext);
-      //
-      // // Assert
-      // expect(mRes.status).toBeCalledWith(200);
-      // expect(mRes.json.mock.calls[0][0].length).toBe(3);
-      // expect(mRes.json.mock.calls[0][0][0].task).toBe('Eat');
-      // expect(mRes.json).toBeCalledWith([{"completed": true, "id": 1, "task": "Eat"}, {"completed": false, "id": 2, "task": "Sleep"}, {"completed": false, "id": 3, "task": "Pray"}])
+      const mReq = {};
+      const mRes = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn()
+      }
+      const mNext = jest.fn();
+
+      // Act
+      await getAllTodos(mReq, mRes, mNext);
+
+      // Assert
+      expect(mRes.status).toBeCalledWith(200);
+      const todos = mRes.json.mock.calls[0][0]
+
+
+      expect(todos.length).toBe(3);
+      expect(todos[0].task).toBe('Eat');
+      expect(todos[0]).toMatchObject({ task: 'Eat', completed: true });
+      expect(todos[1]).toMatchObject({ task: 'Sleep', completed: false })
+      expect(todos[2]).toMatchObject({ task: 'Pray', completed: false })
     })
   })
 
