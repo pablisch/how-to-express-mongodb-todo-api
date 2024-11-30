@@ -130,9 +130,9 @@ describe('Todo routes controller functions unit tests', () => {
 
     test.each([
       [undefined, 'No task was provided'],
-      ['', 'No task was provided'],
-      [212, 'Task must be a string but a number was given'],
-      [true, 'Task must be a string but a boolean was given'],
+      ['', 'The task property cannot be an empty string'],
+      [212, 'Task must be a string but type number was given'],
+      [true, 'Task must be a string but type boolean was given'],
     ])('should return status 400 and an appropriate error message when passed task, "%s" in the request body', async (task, errorMessage) => {
       // Arrange
       const mReq = {

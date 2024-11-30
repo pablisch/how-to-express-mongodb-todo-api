@@ -13,70 +13,71 @@ describe('App todo endpoint integration tests', () => {
       const response = await request(app).get('/todos');
 
       // Assert
-      expect(response.status).toBe(200);
-      expect(response.body.length).toBe(3);
-      expect(response.body[0].task).toBe('Eat');
-      expect(response.body[1].completed).toBe(false);
+      expect(response.status).toBe(200)
+      const allTodos = response.body
+      expect(allTodos.length).toBe(3)
+      expect(allTodos[0].task).toBe('Eat')
+      expect(allTodos[1].completed).toBe(false)
     })
   })
 
-  // describe('GET /todos/:id', () => {
-  //   test.each([
-  //     [1, 'Eat', true],
-  //     [2, 'Sleep', false],
-  //     [3, 'Pray', false]
-  //   ])('should return an array with a single todo and status 200 when called with an ID param of %s', async (id, task, completed) => {
-  //     // Act
-  //     const response = await request(app).get(`/todos/${id}`);
-  //
-  //     // Assert
-  //     expect(response.status).toBe(200);
-  //     expect(response.body.length).toBe(1);
-  //     expect(response.body[0].task).toBe(task);
-  //     expect(response.body[0].completed).toBe(completed);
-  //   })
-  //
-  //   test.each([
-  //     [2000, 404, 'No todo with an ID of 2000 could be found in the database.'],
-  //     ['dog', 400, 'Invalid id provided. ID must be a number.'],
-  //     [true, 400, 'Invalid id provided. ID must be a number.']
-  //   ])('should return an appropriate status and error message when called with an ID param of %s', async (id, status, errorMessage) => {
-  //     // Act
-  //     const response = await request(app).get(`/todos/${id}`);
-  //
-  //     // Assert
-  //     expect(response.status).toBe(status);
-  //     expect(response.body.message).toBe(errorMessage);
-  //   })
-  // })
-  //
-  // describe('POST /todos', () => {
-  //   test.each(['Climb', 'Swim', 'Climb a tree'])('should add a todo to the database and return status 201 and an array containing the created todo object', async (task) => {
-  //     // Act
-  //     const response = await request(app).post('/todos').send({ task });
-  //
-  //     // Assert
-  //     expect(response.status).toBe(201);
-  //     expect(response.body.length).toBe(1);
-  //     expect(response.body[0].task).toBe(task);
-  //     expect(response.body[0].completed).toBe(false);
-  //   })
-  //
-  //   test.each([
-  //     [undefined, 'No task was provided.'],
-  //     ['', 'No task was provided.'],
-  //     [212, 'Task must be a string.'],
-  //     [true, 'Task must be a string.'],
-  //   ])('should return status 400 and an appropriate error message when given task value of %s', async (task, errorMessage) => {
-  //     // Act
-  //     const response = await request(app).post('/todos').send({ task });
-  //
-  //     // Assert
-  //     expect(response.status).toBe(400);
-  //     expect(response.body.message).toBe(errorMessage);
-  //   })
-  // })
-  //
+  describe('GET /todos/:id', () => {
+    test.each([
+      ['123456789012345678901234', 'Eat', true],
+      // ['234567890123456789012345', 'Sleep', false],
+      // ['345678901234567890123456', 'Pray', false]
+    ])('should return an array with a single todo and status 200 when called with an ID param of %s', async (id, task, completed) => {
+      // Act
+      const response = await request(app).get(`/todos/${id}`);
+
+      // Assert
+      expect(response.status).toBe(200)
+      const retrievedTodo = response._body
+      expect(retrievedTodo.task).toBe(task)
+      expect(retrievedTodo.completed).toBe(completed)
+    })
+
+    test.each([
+      ['999999999999999999999999', 404, 'No todo with ID 999999999999999999999999 was found in the database'],
+      ['dog', 400, "'dog' is not a valid todo ID"],
+      [true, 400, "'true' is not a valid todo ID"]
+    ])('should return an appropriate status and error message when called with an ID param of %s', async (id, status, errorMessage) => {
+      // Act
+      const response = await request(app).get(`/todos/${id}`);
+
+      // Assert
+      expect(response.status).toBe(status);
+      expect(response.body.message).toBe(errorMessage);
+    })
+  })
+
+  describe('POST /todos', () => {
+    test.each(['Climb', 'Swim', 'Climb a tree'])('should add a todo to the database and return status 201 and an array containing the created todo object', async (task) => {
+      // Act
+      const response = await request(app).post('/todos').send({ task });
+
+      // Assert
+      expect(response.status).toBe(201);
+      expect(response.body.task).toBe(task);
+      expect(response.body.completed).toBe(false);
+    })
+
+    test.each([
+      [undefined, 'No task was provided'],
+      ['', 'The task property cannot be an empty string'],
+      [212, 'Task must be a string but type number was given'],
+      [["Hello world"], 'Task must be a string but type object was given'],
+      [true, 'Task must be a string but type boolean was given'],
+    ])('should return status 400 and an appropriate error message when given task value of %s', async (task, errorMessage) => {
+      // Act
+      const response = await request(app).post('/todos').send({ task });
+
+      // Assert
+      expect(response.status).toBe(400);
+      expect(response.body.message).toBe(errorMessage);
+    })
+  })
+
   // describe('DELETE /todos/:id', () => {
   //   test.each([
   //     [1, 'Eat', true],
