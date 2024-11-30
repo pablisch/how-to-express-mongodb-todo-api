@@ -34,6 +34,7 @@ The purpose of this project as a guide, not to run the API, but should you wish 
 
 
    Basic step-by-step server setup leading up top controllers
+
    4. [Add a basic GET /todos endpoint in app.js](howTo/4.AddTheGetTodosEndpoint.md)
    5. [Refactor the GET /todos endpoint into a controller function and route](howTo/5.RefactorGetTodosWithControllerFunction.md)
 
