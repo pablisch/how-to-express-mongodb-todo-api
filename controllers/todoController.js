@@ -51,7 +51,7 @@ exports.deleteTodo = async (req, res, next) => {
     if (!todo) {
       return next({ status: 404, message: `No todo with ID ${id} was found in the database` });
     }
-    res.status(204).json({ message: `Todo with ID ${id} was successfully deleted` });
+    res.status(200).json({ message: `Todo with ID ${id} was successfully deleted` });
   } catch (error) {
     next(error);
   }

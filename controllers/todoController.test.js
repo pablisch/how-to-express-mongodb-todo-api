@@ -180,7 +180,7 @@ describe('Todo routes controller functions unit tests', () => {
       await deleteTodo(mReq, mRes, mNext);
 
       // Assert
-      expect(mRes.status).toHaveBeenCalledWith(204);
+      expect(mRes.status).toHaveBeenCalledWith(200);
       expect(mRes.json).toHaveBeenCalledWith({"message": `Todo with ID ${id} was successfully deleted`})
 
       // Act

@@ -73,50 +73,48 @@ describe('App todo endpoint integration tests', () => {
       const response = await request(app).post('/todos').send({ task });
 
       // Assert
-      expect(response.status).toBe(400);
-      expect(response.body.message).toBe(errorMessage);
+      expect(response.status).toBe(400)
+      expect(response.body.message).toBe(errorMessage)
     })
   })
 
-  // describe('DELETE /todos/:id', () => {
-  //   test.each([
-  //     [1, 'Eat', true],
-  //     [2, 'Sleep', false],
-  //     [3, 'Pray', false],
-  //   ])('should delete todo from database and return status 200 and an array with the deleted todo object with id, "%s"', async (id, task, completed) => {
-  //     // Act
-  //     const response = await request(app).delete(`/todos/${id}`);
-  //
-  //     // Assert
-  //     expect(response.status).toBe(200);
-  //     expect(response.body).toEqual([{ id, task, completed }]);
-  //     expect(response.body[0].id).toBe(id);
-  //     expect(response.body[0].task).toBe(task);
-  //     expect(response.body[0].completed).toBe(completed);
-  //   });
-  //
-  //   test.each([
-  //     ['cat', 400, 'Invalid id provided. ID must be a number.'],
-  //     [true, 400, 'Invalid id provided. ID must be a number.'],
-  //     [2000, 404, 'No todo with an ID of 2000 could be found in the database.'],
-  //   ])('should return an appropriate status and error message when passed the ID param, "%s"', async (id, status, errorMessage) => {
-  //     // Act
-  //     const response = await request(app).delete(`/todos/${id}`);
-  //
-  //     // Assert
-  //     expect(response.status).toBe(status);
-  //     expect(response.body.message).toBe(errorMessage);
-  //     expect(response.body).toEqual({ message: errorMessage });
-  //   })
-  // });
-  //
+  describe('DELETE /todos/:id', () => {
+    test.each([
+      ['123456789012345678901234', 'Eat', true],
+      ['234567890123456789012345', 'Sleep', false],
+      ['345678901234567890123456', 'Pray', false],
+    ])('should delete todo from database and return status 200 and an array with the deleted todo object with id, "%s"', async (id, task, completed) => {
+      // Act
+      const response = await request(app).delete(`/todos/${id}`)
+
+      // Assert
+      expect(response.status).toBe(200)
+      expect(response.body).toEqual( {"message": `Todo with ID ${id} was successfully deleted`}
+      )
+    })
+
+    test.each([
+      ['cat', 400, "'cat' is not a valid todo ID"],
+      [true, 400, "'true' is not a valid todo ID"],
+      ['999999999999999999999999', 404, 'No todo with ID 999999999999999999999999 was found in the database'],
+    ])('should return an appropriate status and error message when passed the ID param, "%s"', async (id, status, errorMessage) => {
+      // Act
+      const response = await request(app).delete(`/todos/${id}`);
+
+      // Assert
+      expect(response.status).toBe(status);
+      expect(response.body.message).toBe(errorMessage);
+      expect(response.body).toEqual({ message: errorMessage });
+    })
+  });
+
   // describe('UPDATE /todos/:id', () => {
   //   test.each([
-  //     [1, 'Eat', false],
-  //     [2, 'Dream', true],
-  //     [3, 'Pray', true],
-  //     [1, 'Swim', false],
-  //     [2, 'Dream', false],
+  //     ['123456789012345678901234', 'Eat', false],
+  //     ['234567890123456789012345', 'Dream', true],
+  //     ['345678901234567890123456', 'Pray', true],
+  //     ['123456789012345678901234', 'Swim', false],
+  //     ['234567890123456789012345', 'Dream', false],
   //   ])('should update todo in the database and return status 201 and an array with the updated todo object with id, "%s"', async (id, task, completed) => {
   //     // Act
   //     const response = await request(app).put(`/todos/${id}`).send({ task, completed });
@@ -136,9 +134,9 @@ describe('App todo endpoint integration tests', () => {
   //     [1, 'Dream', 212, 400, 'The completed property must be of type boolean.'],
   //     [2, true, true, 400, 'The task property must be of type string.'],
   //     [3, 212, true, 400, 'The task property must be of type string.'],
-  //     [3000, 'Fly', 'pig', 400, 'The completed property must be of type boolean.'],
+  //     ['999999999999999999999999', 'Fly', 'pig', 400, 'The completed property must be of type boolean.'],
   //     ['cat', 'Fly', true, 400, 'Invalid id provided. ID must be a number.'],
-  //     [3000, 'Fly', true, 404, 'No todo with an ID of 3000 could be found in the database.'],
+  //     ['999999999999999999999999', 'Fly', true, 404, 'No todo with an ID of 999999999999999999999999 could be found in the database.'],
   //   ])('should return an appropriate status and error message when passed the ID param, "%s"', async (id, task, completed, status, errorMessage) => {
   //     // Act
   //     const response = await request(app).put(`/todos/${id}`).send({ task, completed });
