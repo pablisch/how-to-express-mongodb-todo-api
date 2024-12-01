@@ -4,7 +4,7 @@ const request = require('supertest')
 const app = require('./app')
 const seedTodos = require('./seed/seedTodos')
 
-describe('App todo endpoint integration tests', () => {
+describe('App todo endpoints integration tests', () => {
   beforeEach(async () => {
     await seedTodos(false);
   });

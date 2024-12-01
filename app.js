@@ -1,9 +1,6 @@
 const express = require('express')
-require('dotenv').config();
 const todoRoutes = require('./routes/todoRoutes')
-const mongoose = require("mongoose")
-const cors = require('cors');
-const Todo = require("./models/todo");
+const cors = require('cors')
 
 const app = express()
 
@@ -16,19 +13,6 @@ const app = express()
 
 // app.use(cors(corsOptions));
 app.use(cors());
-
-// const connectToDatabase = async () => {
-//     try {
-//         await mongoose.connect(mongoDbUri)
-//         console.log(`🥳 Successfully connected to MongoDB Atlas ${dbName} database! 🌎`)
-//     } catch (error) {
-//         console.log(`😖 Unable to connect to MongoDB Atlas ${dbName} database! ❌`)
-//         console.error(error)
-//         process.exit(1)
-//     }
-// }
-//
-// connectToDatabase()
 
 app.use(express.json())
 

@@ -5,7 +5,6 @@ const { getAllTodos, getTodoById, createTodo, deleteTodo, updateTodo } = require
 const Todo = require('../models/todo')
 
 describe('Todo routes controller functions unit tests', () => {
-
   beforeEach( async () => {
     await seedTodos(false)
   });
