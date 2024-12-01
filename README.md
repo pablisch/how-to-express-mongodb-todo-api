@@ -28,7 +28,7 @@ The purpose of this project as a guide, not to run the API, but should you wish 
 
 ## Contents
 
-1. [Setting up a MongoDB database and connecting to MongoDB Compass](howTo/1.setUpMongoDbDatabase)
+1. [Setting up a MongoDB database and connecting to MongoDB Compass](howTo/1.setUpMongoDbDatabase.md)
 2. [Setting up the repository](howTo/2.SetUpTheRepository.md)
 3. [Setting up a basic Express server](howTo/3.SettingUpTheExpressServer.md)
 
