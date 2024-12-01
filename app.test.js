@@ -183,18 +183,12 @@ describe('App todo endpoint integration tests', () => {
     });
 
     test.each([
-      ['123456789012345678901234', '', false, 400, 'Task cannot be an empty string. If a task property is sent, it must be a valid string'],
-      ['234567890123456789012345', 'Dream', ["Hello world"], 400, 'Completed property must be a Boolean. Received type object'],
-      ['345678901234567890123456', 'Dream', 'fish', 400, 'Completed property must be a Boolean. Received type string'],
-      ['123456789012345678901234', 'Dream', 212, 400, 'Completed property must be a Boolean. Received type number'],
-      ['234567890123456789012345', true, true, 400, 'Task property must be a string. Received type boolean'],
-      ['345678901234567890123456', 212, true, 400, 'Task property must be a string. Received type number'],
-      ['999999999999999999999999', 'Fly', 'pig', 400, 'Completed property must be a Boolean. Received type string'],
-      ['cat', 'Fly', true, 400, "'cat' is not a valid todo ID"],
-      ['999999999999999999999999', 'Fly', true, 404, 'No todo with ID 999999999999999999999999 was found in the database'],
-    ])('should return an appropriate status and error message when passed the ID param, "%s", task property, "%s" and completed property, "%s"', async (id, task, completed, status, errorMessage) => {
+      ['123456789012345678901234', '', true, 400, 'Task cannot be an empty string. If a task property is sent, it must be a valid string'],
+      ['234567890123456789012345', true, false, 400, 'Task property must be a string. Received type boolean'],
+      ['345678901234567890123456', 212, false, 400, 'Task property must be a string. Received type number'],
+    ])('should return an appropriate status and error message when passed the ID param, "%s" and ONLY task property, "%s"', async (id, task, completed, status, errorMessage) => {
       // Act
-      const response = await request(app).patch(`/todos/${id}`).send({ task, completed });
+      const response = await request(app).patch(`/todos/${id}`).send({ task });
 
       // Assert
       expect(response.status).toBe(status);
@@ -203,18 +197,13 @@ describe('App todo endpoint integration tests', () => {
     });
 
     test.each([
-      ['123456789012345678901234', '', false, 400, 'Task cannot be an empty string. If a task property is sent, it must be a valid string'],
-      ['234567890123456789012345', 'Dream', ["Hello world"], 400, 'Completed property must be a Boolean. Received type object'],
-      ['345678901234567890123456', 'Dream', 'fish', 400, 'Completed property must be a Boolean. Received type string'],
-      ['123456789012345678901234', 'Dream', 212, 400, 'Completed property must be a Boolean. Received type number'],
-      ['234567890123456789012345', true, true, 400, 'Task property must be a string. Received type boolean'],
-      ['345678901234567890123456', 212, true, 400, 'Task property must be a string. Received type number'],
-      ['999999999999999999999999', 'Fly', 'pig', 400, 'Completed property must be a Boolean. Received type string'],
-      ['cat', 'Fly', true, 400, "'cat' is not a valid todo ID"],
-      ['999999999999999999999999', 'Fly', true, 404, 'No todo with ID 999999999999999999999999 was found in the database'],
-    ])('should return an appropriate status and error message when passed the ID param, "%s", task property, "%s" and completed property, "%s"', async (id, task, completed, status, errorMessage) => {
+      ['123456789012345678901234', 'Eat', 212, 400, 'Completed property must be a Boolean. Received type number'],
+      ['234567890123456789012345', 'Sleep', ["Hello world"], 400, 'Completed property must be a Boolean. Received type object'],
+      ['345678901234567890123456', 'Pray', 'fish', 400, 'Completed property must be a Boolean. Received type string'],
+      ['999999999999999999999999', 'Eat', 'pig', 400, 'Completed property must be a Boolean. Received type string'],
+    ])('should return an appropriate status and error message when passed the ID param, "%s" and ONLY completed property, "%s"', async (id, task, completed, status, errorMessage) => {
       // Act
-      const response = await request(app).patch(`/todos/${id}`).send({ task, completed });
+      const response = await request(app).patch(`/todos/${id}`).send({ completed });
 
       // Assert
       expect(response.status).toBe(status);
