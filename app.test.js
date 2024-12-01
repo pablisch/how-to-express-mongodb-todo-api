@@ -26,8 +26,8 @@ describe('App todo endpoint integration tests', () => {
   describe('GET /todos/:id', () => {
     test.each([
       ['123456789012345678901234', 'Eat', true],
-      // ['234567890123456789012345', 'Sleep', false],
-      // ['345678901234567890123456', 'Pray', false]
+      ['234567890123456789012345', 'Sleep', false],
+      ['345678901234567890123456', 'Pray', false]
     ])('should return an array with a single todo and status 200 when called with an ID param of %s', async (id, task, completed) => {
       // Act
       const response = await request(app).get(`/todos/${id}`);
