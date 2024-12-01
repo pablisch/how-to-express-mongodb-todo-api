@@ -47,7 +47,8 @@ The purpose of this project as a guide, not to run the API, but should you wish 
 9. [Add the GET /todos endpoint (as controller function and route](howTo/9.addGetTodosEndpointAsControllerAndRoute)
 
 
-10. [GET /todos controller function unit test](howTo/10.getTodosControllerUnitTests)
+10. [getAllTodos controller function unit test](howTo/10.getTodosControllerUnitTests)
+11. [GET /todos integration tests](howTo/11.getTodosIntegrationTests.md)
 
 
 1. [Setting up the repository](#setting-up-the-repository)
