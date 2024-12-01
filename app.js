@@ -1,16 +1,9 @@
 const express = require('express')
 require('dotenv').config();
 const todoRoutes = require('./routes/todoRoutes')
-const mongoose = require("mongoose");
+const mongoose = require("mongoose")
 const cors = require('cors');
 const Todo = require("./models/todo");
-
-const dbPassword = process.env.MONGODB_PASSWORD;
-const dbUser = process.env.MONGODB_USERNAME;
-const cluster = process.env.MONGODB_CLUSTER_REF;
-const dbName = process.env.MONGODB_DATABASE_NAME || 'todo_DEV';
-
-const mongoDbUri = `mongodb+srv://${dbUser}:${dbPassword}@${cluster}.mongodb.net/${dbName}`;
 
 const app = express()
 
@@ -24,17 +17,18 @@ const app = express()
 // app.use(cors(corsOptions));
 app.use(cors());
 
-mongoose
-    .connect(mongoDbUri)
-    .then(() => {
-      // console.log(
-          // `🥳 Successfully connected to MongoDB Atlas ${dbName} database! 🌎`
-      // )
-    })
-    .catch((error) => {
-      console.log(`😖 Unable to connect to MongoDB Atlas ${dbName} database! ❌`);
-      console.error(error);
-    })
+// const connectToDatabase = async () => {
+//     try {
+//         await mongoose.connect(mongoDbUri)
+//         console.log(`🥳 Successfully connected to MongoDB Atlas ${dbName} database! 🌎`)
+//     } catch (error) {
+//         console.log(`😖 Unable to connect to MongoDB Atlas ${dbName} database! ❌`)
+//         console.error(error)
+//         process.exit(1)
+//     }
+// }
+//
+// connectToDatabase()
 
 app.use(express.json())
 

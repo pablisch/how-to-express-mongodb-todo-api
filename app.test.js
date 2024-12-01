@@ -1,5 +1,7 @@
-const request = require('supertest');
-const app = require('./app');
+process.env.MONGODB_DATABASE_NAME = 'todo_TEST'
+
+const request = require('supertest')
+const app = require('./app')
 const seedTodosForTests = require('./seed/seedTodosForTests')
 
 describe('App todo endpoint integration tests', () => {
