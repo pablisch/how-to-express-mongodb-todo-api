@@ -162,25 +162,25 @@ describe('App todo endpoint integration tests', () => {
       expect(updatedTodo.completed).toBe(completed);
     });
 
-    // test.each([
-    //   [1, '', false, 400, 'Task and completed properties are required to update this todo.'],
-    //   [2, 'Dream', undefined, 400, 'Task and completed properties are required to update this todo.'],
-    //   [3, 'Dream', 'fish', 400, 'The completed property must be of type boolean.'],
-    //   [1, 'Dream', 212, 400, 'The completed property must be of type boolean.'],
-    //   [2, true, true, 400, 'The task property must be of type string.'],
-    //   [3, 212, true, 400, 'The task property must be of type string.'],
-    //   ['999999999999999999999999', 'Fly', 'pig', 400, 'The completed property must be of type boolean.'],
-    //   ['cat', 'Fly', true, 400, 'Invalid id provided. ID must be a number.'],
-    //   ['999999999999999999999999', 'Fly', true, 404, 'No todo with an ID of 999999999999999999999999 could be found in the database.'],
-    // ])('should return an appropriate status and error message when passed the ID param, "%s"', async (id, task, completed, status, errorMessage) => {
-    //   // Act
-    //   const response = await request(app).patch(`/todos/${id}`).send({ task, completed });
-    //
-    //   // Assert
-    //   expect(response.status).toBe(status);
-    //   expect(response.body.message).toBe(errorMessage);
-    //   expect(response.body).toEqual({ message: errorMessage });
-    // });
+    test.each([
+      ['123456789012345678901234', '', false, 400, 'Task cannot be an empty string. If a task property is sent, it must be a valid string'],
+      ['234567890123456789012345', 'Dream', ["Hello world"], 400, 'Completed property must be a Boolean. Received type object'],
+      ['345678901234567890123456', 'Dream', 'fish', 400, 'Completed property must be a Boolean. Received type string'],
+      ['123456789012345678901234', 'Dream', 212, 400, 'Completed property must be a Boolean. Received type number'],
+      ['234567890123456789012345', true, true, 400, 'Task property must be a string. Received type boolean'],
+      ['345678901234567890123456', 212, true, 400, 'Task property must be a string. Received type number'],
+      ['999999999999999999999999', 'Fly', 'pig', 400, 'Completed property must be a Boolean. Received type string'],
+      ['cat', 'Fly', true, 400, "'cat' is not a valid todo ID"],
+      ['999999999999999999999999', 'Fly', true, 404, 'No todo with ID 999999999999999999999999 was found in the database'],
+    ])('should return an appropriate status and error message when passed the ID param, "%s"', async (id, task, completed, status, errorMessage) => {
+      // Act
+      const response = await request(app).patch(`/todos/${id}`).send({ task, completed });
+
+      // Assert
+      expect(response.status).toBe(status);
+      expect(response.body.message).toBe(errorMessage);
+      expect(response.body).toEqual({ message: errorMessage });
+    });
   });
 });
 

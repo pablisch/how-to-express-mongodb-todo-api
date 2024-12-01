@@ -59,10 +59,10 @@ exports.deleteTodo = async (req, res, next) => {
 
 exports.updateTodo = async (req, res, next) => {
   const { id } = req.params
-  const updates = req.body
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return next({ status: 400, message: `'${id}' is not a valid todo ID` })
   }
+  const updates = req.body
   if (!updates || typeof updates !== 'object' || Array.isArray(updates)) {
     return next({ status: 400, message: 'Updates must be an object' })
   }
