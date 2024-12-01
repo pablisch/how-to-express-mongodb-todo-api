@@ -18,10 +18,7 @@ The purpose of this project as a guide, not to run the API, but should you wish 
 * NOTE: this requires a MongoDB Atlas database instance
 * Replace `MONGODB_USERNAME`, `MONGODB_PASSWORD`, `MONGODB_DATABASE_NAME` and `MONGODB_CLUSTER_REF` with your Mongo DB Atlas details.
 * Create a database called `todo_DEV` in MongoDB Atlas.
-
-[//]: # (TODO reconcile the seeding instruction below with MongoDB)
-* Run the `tables.sql` and `seeds.sql` files in the `db` folder to create the tables and seed the database.
-* 
+* Run the scripts `npm run seed:todos:dev` and `npm run seed:todos:test` to seed the databases.
 * Run `npm start` to start the server.
 * Use a tool like Postman to make requests to the API.
 * Run `npm test` to run the tests.
@@ -39,12 +36,12 @@ The purpose of this project as a guide, not to run the API, but should you wish 
 
    **Basic step-by-step server setup leading up top controllers**
 
-8. [Add a basic GET /todos endpoint in app.js](howTo/8.addTheGetTodosEndpoint)
+8. [Add a basic GET /todos endpoint in app.js then refactor](howTo/8.addTheGetTodosEndpoint)
 
  
    **Straight to controllers and routes**
 
-9. [Add the GET /todos endpoint (as controller function and route](howTo/9.addGetTodosEndpointAsControllerAndRoute)
+9. [Add the GET /todos endpoint (directly as controller function and route)](howTo/9.addGetTodosEndpointAsControllerAndRoute)
 
 
 10. [getAllTodos controller function unit test](howTo/10.getTodosControllerUnitTests)
