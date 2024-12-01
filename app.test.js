@@ -172,7 +172,7 @@ describe('App todo endpoint integration tests', () => {
       ['999999999999999999999999', 'Fly', 'pig', 400, 'Completed property must be a Boolean. Received type string'],
       ['cat', 'Fly', true, 400, "'cat' is not a valid todo ID"],
       ['999999999999999999999999', 'Fly', true, 404, 'No todo with ID 999999999999999999999999 was found in the database'],
-    ])('should return an appropriate status and error message when passed the ID param, "%s"', async (id, task, completed, status, errorMessage) => {
+    ])('should return an appropriate status and error message when passed the ID param, "%s", task property, "%s" and completed property, "%s"', async (id, task, completed, status, errorMessage) => {
       // Act
       const response = await request(app).patch(`/todos/${id}`).send({ task, completed });
 
@@ -181,6 +181,7 @@ describe('App todo endpoint integration tests', () => {
       expect(response.body.message).toBe(errorMessage);
       expect(response.body).toEqual({ message: errorMessage });
     });
+
   });
 });
 
