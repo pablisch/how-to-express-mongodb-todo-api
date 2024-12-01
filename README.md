@@ -51,6 +51,8 @@ The purpose of this project as a guide, not to run the API, but should you wish 
 11. [GET /todos integration tests](howTo/11.getTodosIntegrationTests.md)
 
 
+-----
+
 1. [Setting up the repository](#setting-up-the-repository)
 2. [Setting up the database](#setting-up-the-database)
 3. [Prepare for using the database in the API](#prepare-for-using-the-database-in-the-api)
