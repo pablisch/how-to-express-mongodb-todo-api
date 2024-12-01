@@ -1,11 +1,13 @@
-const seedTodosForTests = require('../seed/seedTodosForTests')
+process.env.MONGODB_DATABASE_NAME = 'todo_TEST'
+
+const seedTodos = require('../seed/seedTodos')
 const { getAllTodos, getTodoById, createTodo, deleteTodo, updateTodo } = require('./todoController')
 const Todo = require('../models/todo')
 
 describe('Todo routes controller functions unit tests', () => {
 
   beforeEach( async () => {
-    await seedTodosForTests()
+    await seedTodos(false)
   });
 
   describe('getAllTodos()', () => {
@@ -184,10 +186,10 @@ describe('Todo routes controller functions unit tests', () => {
       expect(mRes.json).toHaveBeenCalledWith({"message": `Todo with ID ${id} was successfully deleted`})
 
       // Act
-      // const todo = await Todo.findById(id)
-      //
-      // // Assert
-      // expect(todo).toBeNull()
+      const todo = await Todo.findById(id)
+
+      // Assert
+      expect(todo).toBeNull()
     })
 
     test.each([
