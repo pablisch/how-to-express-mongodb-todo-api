@@ -7,7 +7,7 @@
     "test:watch": "jest --watchAll --detectOpenHandles",
     "test": "jest --runInBand --detectOpenHandles  --forceExit",
     "start": "node --watch server.js",
-    "seed:todos:dev": "node seed/seedTodos.js",
+    "seed:todos:dev": "node seed/callSeedTodos.js",
     "seed:todos:test": "MONGODB_DATABASE_NAME=todo_TEST node seed/callSeedTodos.js"
   },
   "author": "",

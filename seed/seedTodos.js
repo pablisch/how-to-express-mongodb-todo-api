@@ -4,14 +4,13 @@ const connectToDatabase = require('../db')
 
 const clearTodos = async () => {
     await Todo.deleteMany({});
-};
+}
 
 const insertTodos = async () => {
     await Todo.insertMany(todoSeedData);
-};
+}
 
 const seedTodos = async (logSuccess = true) => {
-
     try {
         await connectToDatabase(logSuccess)
         await clearTodos();
@@ -22,7 +21,7 @@ const seedTodos = async (logSuccess = true) => {
     } finally {
         if (logSuccess) process.exit(0)
     }
-};
+}
 
 module.exports = seedTodos
 

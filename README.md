@@ -31,20 +31,24 @@ The purpose of this project as a guide, not to run the API, but should you wish 
 1. [Setting up a MongoDB database and connecting to MongoDB Compass](howTo/1.setUpMongoDbDatabase.md)
 2. [Setting up the repository](howTo/2.setUpTheRepository)
 3. [Setting up a basic Express server](howTo/3.SettingUpTheExpressServer)
+4. [Creating the Todo schema and seeds](howTo/4.creatingTheTodoSchemaAndSeeds.md)
+5. [Set up the database connection](howTo/5.databaseConnection.md)
+6. [Create the seeding function and scripts](howTo/6.seedingFunctions.md)
+7. [Connect the server and the database in server.js](howTo/7.connectServerAndDatabase.md)
 
 
    **Basic step-by-step server setup leading up top controllers**
 
-4. [Add a basic GET /todos endpoint in app.js](howTo/5.addTheGetTodosEndpoint)
-5. [Refactor the GET /todos endpoint into a controller function and route](howTo/5.refactorGetTodosWithControllerFunction)
+8. [Add a basic GET /todos endpoint in app.js](howTo/8.addTheGetTodosEndpoint)
 
  
    **Straight to controllers and routes**
 
-6. [Add the GET /todos endpoint (as controller function and route](howTo/6.addGetTodosEndpointAsControllerAndRoute)
+9. [Add the GET /todos endpoint (as controller function and route](howTo/9.addGetTodosEndpointAsControllerAndRoute)
 
 
-7. [GET /todos controller function unit test](howTo/7.getTodosControllerUnitTest)
+10. [GET /todos controller function unit test](howTo/10.getTodosControllerUnitTest)
+
 
 1. [Setting up the repository](#setting-up-the-repository)
 2. [Setting up the database](#setting-up-the-database)
