@@ -11,10 +11,10 @@ exports.getAllTodos = async (req, res, next) => {
 }
 
 exports.getTodoById = async (req, res, next) => {
-  const { id } = req.params;
+  const { id } = req.params
   if (!mongoose.Types.ObjectId.isValid(id)) return next({ status: 400, message: `'${id}' is not a valid todo ID` })
   try {
-    const todo = await Todo.findById(id);
+    const todo = await Todo.findById(id)
     if (!todo) {
       return next({ status: 404, message: `No todo with ID ${id} was found in the database` })
     }
