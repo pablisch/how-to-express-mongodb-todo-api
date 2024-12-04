@@ -80,48 +80,7 @@ The purpose of this project as a guide, not to run the API, but should you wish 
 
 
 
-## GET /todos/:id 3 - Add the single todo route and write integration tests
 
-### Create the single todo route
-
-Add the `getTodoById` function to the todoController imports.
-```javascript
-const { getAllTodos, getTodoById } = require('../controllers/todoController');
-```
-
-In the routes/todoRoutes.js file, add the single todo route:
-```javascript
-router.get('/:id', getTodoById);
-```
-
-
-## POST /todos 1 - Basic addTodo controller function and unit tests
-
-### Create the basic addTodo controller function
-
-In the todoController.js file, create the `addTodo` function:
-```javascript
-const addTodo = async (req, res, next) => {
-  const { task } = req.body;
-  const addTodoQuery = 'INSERT INTO todos (task, completed) VALUES ($1, false) RETURNING *';
-
-  try {
-    const results = await pool.query(addTodoQuery, [task]);
-    res.status(201).json(results.rows);
-  } catch (error) {
-    next(error);
-  }
-};
-```
-
-Add `addTodo` to the exports:
-```javascript
-module.exports = {
-  getAllTodos,
-  getTodoById,
-  addTodo
-};
-```
 
 ### Create 'happy route' tests for the addTodo controller function
 

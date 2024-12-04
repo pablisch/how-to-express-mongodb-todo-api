@@ -25,8 +25,8 @@ exports.getTodoById = async (req, res, next) => {
 }
 
 exports.createTodo = async (req, res, next) => {
-  if (req.body?.task === '') return next({ status: 400, message: "The task property cannot be an empty string" })
   const { task } = req.body
+  if (task === '') return next({ status: 400, message: "The task property cannot be an empty string" })
   if (!task) return next({ status: 400, message: `No task was provided` })
   if (typeof task !== 'string') return next({status: 400, message: `Task must be a string but type ${typeof(task)} was given`})
   const todo = new Todo({
@@ -39,7 +39,7 @@ exports.createTodo = async (req, res, next) => {
   } catch (error) {
     next(error)
   }
-};
+}
 
 exports.deleteTodo = async (req, res, next) => {
   const { id } = req.params;
