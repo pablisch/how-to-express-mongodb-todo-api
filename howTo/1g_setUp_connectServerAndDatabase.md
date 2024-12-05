@@ -51,6 +51,8 @@ app.listen(port, () => {
 ```
 
 The minimal step to add the database connection would be to import the connection function and call it:
+
+**EXAMPLE CODE NOT USED IN THIS APP**
 ```javascript
 const app = require('./app')
 const port = process.env.PORT || 3000
@@ -69,12 +71,14 @@ This would work but:
 
 ### Joining the database connection and server start with error handling
 
+**EXAMPLE CODE NOT USED IN THIS APP**
+
 ```javascript
 const startServer = async () => {
   try {
     await connectToDatabase()
     app.listen(port, () => {
-      console.log(Server listening on port ${port})
+      console.log(`Server listening on port ${port}`)
     })
   } catch (error) {
     console.error("Failed to start the server:", error)
@@ -108,6 +112,37 @@ Here, there is a single function with error handling but it still calls the `asy
 - The preceeding `;` stops the function from being joined to the preceeding import call and causing an error. Where lines end in a `;` anyway, this is not an issue. As I often use a prettier setting to remove end of line punctuation, this becomes essential.
 
 And we are back to the final code shown at the beginning of this chapter with no `async/await` issue, joined and with error handling.
+
+NEXT UP:
+
+[GET /todos route in app.js (simple step by step version)](2a_getTodos_stepByStep.md)
+
+OR
+
+[GET /todos route as controller function and route](2b_getTodos_StraightToController.md)
+
+**NOTE:** Both steps will end up with the same result. If you choose the first option (app.js) then this will be refactored into a controller function and route.
+
+## Final code in server.js
+
+```javascript
+const app = require('./app')
+const port = process.env.PORT || 3000
+const connectToDatabase = require('./db')
+
+;(async () => {
+    try {
+        await connectToDatabase()
+        app.listen(port, () => {
+            console.log(`Server listening on port ${port}`)
+        })
+    } catch (error) {
+        console.error("Failed to start the server:", error)
+        process.exit(1)
+    }
+})()
+
+```
 
 NEXT UP:
 
