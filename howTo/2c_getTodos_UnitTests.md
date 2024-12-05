@@ -2,7 +2,9 @@
 
 ## import files into the controller test file
 
-Create a test file, `todoController.test.js`, in the `controllers` folder, import `getAllTodos` and `seedTodos`, import the `Todo` model, and set the environment variable,`MONGODB_DATABASE_NAME` to set the database to the `todo_TEST` database.
+In the file, `todoController.test.js`, in the `controllers` folder, import `getAllTodos` and `seedTodos`, import the `Todo` model, and set the environment variable,`MONGODB_DATABASE_NAME` to set the database to the `todo_TEST` database.
+
+**NOTE:** Setting the `MONGODB_DATABASE_NAME` environment variable overrides the default value of `todos_DEV`.
 
 ```javascript
 process.env.MONGODB_DATABASE_NAME = 'todo_TEST'
@@ -12,7 +14,7 @@ const { getAllTodos } = require('./todoController')
 const Todo = require('../models/todo')
 ```
 
-### Set up over-arching `describe` block and `beforeEach` block
+### Set up an over-arching `describe` block and `beforeEach` block
 
 ```javascript
 describe('Todo routes controller functions unit tests', () => {
@@ -22,41 +24,49 @@ describe('Todo routes controller functions unit tests', () => {
 })
 ```
 
-## Write a test for the `getAllTodos` function
+**NOTE:** the `beforeEach` block calls `seedTodos` to make sure that the database is in a set state before each test with the same three items in it so that each test is independent from all others in a completely controlled environment. The `false` argument passed in is for the `logSuccess` parameter and suppresses any console logging upon successful connection to the database or operation as this does not play nicely with tests. It is also used to stop the `process.exit` which would end the test run.
+
+## Add a describe block for `getAllTodo` tests
 
 ```javascript
 describe('getAllTodos()', () => {
-    test('should return an array of all todo objects and status 200', async () => {
-        // Arrange
-        const mReq = {}
-        const mRes = {
-            status: jest.fn().mockReturnThis(),
-            json: jest.fn()
-        }
-        const mNext = jest.fn()
+    
+})
+```
 
-        // Act
-        await getAllTodos(mReq, mRes, mNext);
+## Write `getAllTodos` controller 'happy route' tests
 
-        // Assert
-        expect(mRes.status).toBeCalledWith(200)
-        const todos = mRes.json.mock.calls[0][0]
+```javascript
+test('should return an array of all todo objects and status 200', async () => {
+    // Arrange
+    const mReq = {}
+    const mRes = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn()
+    }
+    const mNext = jest.fn()
 
-        expect(todos.length).toBe(3)
-        expect(todos[0].task).toBe('Eat')
-        expect(todos[0]).toMatchObject({ task: 'Eat', completed: true })
-        expect(todos[1]).toMatchObject({ task: 'Sleep', completed: false })
-        expect(todos[2]).toMatchObject({ task: 'Pray', completed: false })
-        
-        const now = Date.now()
-        todos.forEach(todo => {
-            expect(todo).toHaveProperty('_id')
-            expect(todo._id.toString()).toMatch(/^[a-f\d]{24}$/i)
-            expect(todo).toHaveProperty('createdAt')
-            expect(new Date(todo.createdAt).getTime() < now)
-            expect(todo).toHaveProperty('updatedAt')
-            expect(new Date(todo.updatedAt).getTime() < now)
-        })
+    // Act
+    await getAllTodos(mReq, mRes, mNext);
+
+    // Assert
+    expect(mRes.status).toBeCalledWith(200)
+    const todos = mRes.json.mock.calls[0][0]
+
+    expect(todos.length).toBe(3)
+    expect(todos[0].task).toBe('Eat')
+    expect(todos[0]).toMatchObject({ task: 'Eat', completed: true })
+    expect(todos[1]).toMatchObject({ task: 'Sleep', completed: false })
+    expect(todos[2]).toMatchObject({ task: 'Pray', completed: false })
+    
+    const now = Date.now()
+    todos.forEach(todo => {
+        expect(todo).toHaveProperty('_id')
+        expect(todo._id.toString()).toMatch(/^[a-f\d]{24}$/i)
+        expect(todo).toHaveProperty('createdAt')
+        expect(new Date(todo.createdAt).getTime() < now)
+        expect(todo).toHaveProperty('updatedAt')
+        expect(new Date(todo.updatedAt).getTime() < now)
     })
 })
 ```
@@ -94,5 +104,7 @@ describe('getAllTodos()', () => {
 ```bash
 npm test
 ```
+
+**NOTE:** For all other controller functions there will be validation and error handling tests but there really isn't anything that __should__ go wrong with the basic `GET` route that returns all items. Any server errors will be handled by the `next` middleware.
 
 [NEXT: GET /todos endpoint integration tests](2d_getTodos_integrationTests.md)
