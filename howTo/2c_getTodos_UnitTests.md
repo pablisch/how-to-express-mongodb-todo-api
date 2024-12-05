@@ -105,6 +105,6 @@ test('should return an array of all todo objects and status 200', async () => {
 npm test
 ```
 
-**NOTE:** For all other controller functions there will be validation and error handling tests but there really isn't anything that __should__ go wrong with the basic `GET` route that returns all items. Any server errors will be handled by the `next` middleware.
+**NOTE:** For all other controller functions there will be validation and error handling tests but there really isn't anything that _should_ go wrong with the basic `GET` route that returns all items. Any server errors will be handled by the `next` middleware.
 
 [NEXT: GET /todos endpoint integration tests](2d_getTodos_integrationTests.md)
