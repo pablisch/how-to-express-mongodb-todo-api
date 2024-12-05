@@ -91,3 +91,57 @@ app.get("/todos", async (req, res, next) => { // remove this section
 At this point, you could also remove the `home` route from app.js, whose purpose was only to test the server was working.
 
 [NEXT: getAllTodos controller function unit tests](2c_getTodos_UnitTests.md)
+
+## Final code at the end of this section
+
+### app.js
+
+```javascript
+const express = require('express')
+const todoRoutes = require('./routes/todoRoutes')
+const cors = require('cors')
+
+const app = express()
+
+app.use(express.json())
+
+app.use('/todos', todoRoutes)
+
+app.use((err, req, res, next) => {
+    const status = err.status || 500
+    res.status(status).json({ message: err.message })
+})
+
+module.exports = app
+```
+
+### routes/todoRoutes.js
+
+```javascript
+const { Router } = require('express')
+const router = Router()
+
+const { getAllTodos } = require('../controllers/todoController')
+
+router.get('/', getAllTodos)
+
+module.exports = router
+```
+
+### controllers/todoController.js
+
+```javascript
+const Todo = require('../models/todo')
+const mongoose = require('mongoose')
+
+exports.getAllTodos = async (req, res, next) => {
+    try {
+        const todos = await Todo.find()
+        res.status(200).json(todos)
+    } catch (error) {
+        next(error)
+    }
+}
+```
+
+[NEXT: getAllTodos controller function unit tests](2c_getTodos_UnitTests.md)

@@ -42,20 +42,20 @@ exports.createTodo = async (req, res, next) => {
 }
 
 exports.deleteTodo = async (req, res, next) => {
-  const { id } = req.params;
+  const { id } = req.params
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    return next({ status: 400, message: `'${id}' is not a valid todo ID` });
+    return next({ status: 400, message: `'${id}' is not a valid todo ID` })
   }
   try {
-    const todo = await Todo.findByIdAndDelete(id);
+    const todo = await Todo.findByIdAndDelete(id)
     if (!todo) {
-      return next({ status: 404, message: `No todo with ID ${id} was found in the database` });
+      return next({ status: 404, message: `No todo with ID ${id} was found in the database` })
     }
-    res.status(200).json({ message: `Todo with ID ${id} was successfully deleted` });
+    res.status(200).json({ message: `Todo with ID ${id} was successfully deleted` })
   } catch (error) {
-    next(error);
+    next(error)
   }
-};
+}
 
 exports.updateTodo = async (req, res, next) => {
   const { id } = req.params
@@ -80,6 +80,6 @@ exports.updateTodo = async (req, res, next) => {
     }
     res.status(200).json(todo);
   } catch (error) {
-    next(error);
+    next(error)
   }
-};
+}
