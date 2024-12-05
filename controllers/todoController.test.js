@@ -103,7 +103,7 @@ describe('Todo routes controller functions unit tests', () => {
       expect(todoCall.status).toBe(status);
       expect(todoCall.message).toBe(errorMessage);
     })
-  });
+  })
 
   describe('createTodo()', () => {
     test.each(['Climb', 'Swim', 'Climb a tree'])('should add a todo to the database and return an array with the added todo and status 201', async (task) => {
