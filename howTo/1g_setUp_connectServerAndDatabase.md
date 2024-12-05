@@ -27,11 +27,11 @@ There is no further development in thsi chapter and you can move straight on. Al
 
 NEXT UP:
 
-[GET /todos route in app.js (simple step by step version)](8.addTheGetTodosEndpoint)
+[GET /todos route in app.js (simple step by step version)](2a_getTodos_stepByStep)
 
 OR
 
-[GET /todos route as controller function and route](9.addGetTodosEndpointAsControllerAndRoute)
+[GET /todos route as controller function and route](2b_getTodos_StraightToController)
 
 **NOTE:** Both steps will end up with the same result. If you choose the first option (app.js) then this will be refactored into a controller function and route.
 
@@ -111,10 +111,10 @@ And we are back to the final code shown at the beginning of this chapter with no
 
 NEXT UP:
 
-[GET /todos route in app.js (simple step by step version)](8.addTheGetTodosEndpoint)
+[GET /todos route in app.js (simple step by step version)](2a_getTodos_stepByStep)
 
 OR
 
-[GET /todos route as controller function and route](9.addGetTodosEndpointAsControllerAndRoute)
+[GET /todos route as controller function and route](2b_getTodos_StraightToController)
 
 **NOTE:** Both steps will end up with the same result. If you choose the first option (app.js) then this will be refactored into a controller function and route.

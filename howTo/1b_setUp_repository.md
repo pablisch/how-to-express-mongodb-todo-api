@@ -30,4 +30,4 @@ MONGODB_CLUSTER_REF=<your-cluster-reference> # e.g. cluster0.kdyng
 PORT=3000
 ```
 
-[NEXT: Setting up a basic Express server](3.SettingUpTheExpressServer)
+[NEXT: Setting up a basic Express server](1c_setUp_expressServer)

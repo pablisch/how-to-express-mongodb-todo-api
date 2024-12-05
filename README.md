@@ -25,27 +25,27 @@ The purpose of this project as a guide, not to run the API, but should you wish 
 
 ## Contents
 
-1. [Setting up a MongoDB database and connecting to MongoDB Compass](howTo/1.setUpMongoDbDatabase.md)
-2. [Setting up the repository](howTo/2.setUpTheRepository)
-3. [Setting up a basic Express server](howTo/3.SettingUpTheExpressServer)
-4. [Creating the Todo schema and seeds](howTo/4.creatingTheTodoSchemaAndSeeds.md)
-5. [Set up the database connection](howTo/5.databaseConnection.md)
-6. [Create the seeding function and scripts](howTo/6.seedingFunctions.md)
-7. [Connect the server and the database in server.js](howTo/7.connectServerAndDatabase.md)
+1. [Setting up a MongoDB database and connecting to MongoDB Compass](howTo/1a_setUp_mongoDbDatabase)
+2. [Setting up the repository](howTo/1b_setUp_repository)
+3. [Setting up a basic Express server](howTo/1c_setUp_expressServer)
+4. [Creating the Todo schema and seeds](howTo/1d_setUp_todoSchemaAndSeeds)
+5. [Set up the database connection](howTo/1e_setUp_databaseConnection)
+6. [Create the seeding function and scripts](howTo/1f_setUp_seedingFunctions)
+7. [Connect the server and the database in server.js](howTo/1g_setUp_connectServerAndDatabase)
 
 
    **Basic step-by-step server setup leading up top controllers**
 
-8. [Add a basic GET /todos endpoint in app.js then refactor](howTo/8.addTheGetTodosEndpoint)
+8. [Add a basic GET /todos endpoint in app.js then refactor](howTo/2a_getTodos_stepByStep)
 
  
    **Straight to controllers and routes**
 
-9. [Add the GET /todos endpoint (directly as controller function and route)](howTo/9.addGetTodosEndpointAsControllerAndRoute)
+9. [Add the GET /todos endpoint (directly as controller function and route)](howTo/2b_getTodos_StraightToController)
 
 
-10. [getAllTodos controller function unit test](howTo/10.getTodosControllerUnitTests)
-11. [GET /todos integration tests](howTo/11.getTodosIntegrationTests.md)
+10. [getAllTodos controller function unit test](howTo/2c_getTodos_UnitTests)
+11. [GET /todos integration tests](howTo/2d_getTodos_integrationTests)
 
 
 -----
@@ -80,89 +80,6 @@ The purpose of this project as a guide, not to run the API, but should you wish 
 
 
 
-
-
-### Create 'happy route' tests for the addTodo controller function
-
-In the todoController.test.js file, add `addTodo` to the imports.
-```javascript
-const { getAllTodos, getTodoById, addTodo } = require('./todoController');
-```
-
-Add a `describe` block for the `addTodo` function and a `test` block for the happy route.
-```javascript
-describe('addTodo()', () => {
-    test.each(['Climb', 'Swim', 'Climb a tree'])('should add a todo to the database and return an array with the added todo and status 201', async (task) => {
-      // Arrange
-      const mReq = {
-        body: {
-          task
-        }
-      };
-      const mRes = {
-        status: jest.fn().mockReturnThis(),
-        json: jest.fn()
-      };
-      const mNext = jest.fn();
-
-      // Act
-      await addTodo(mReq, mRes, mNext);
-
-      // Assert
-      expect(mRes.status).toHaveBeenCalledWith(201);
-      expect(mRes.json.mock.calls[0][0].length).toBe(1);
-      expect(mRes.json.mock.calls[0][0][0].task).toBe(task);
-      expect(mRes.json.mock.calls[0][0][0].completed).toBe(false);
-    })
-  })
-```
-
-## POST /todos 2 - Error handling in the addTodo controller function and unit testing errors
-
-### Validate the `task` parameter
-
-Right after the `task` is destructured from `req.body`, add a check to see if it is `undefined` or an empty string. If it is, return an error.
-```javascript
-if (!task) return next({ status: 400, message: `No task was provided.` });
-```
-
-Then check to see if the `task` is a string. If it is not, return an error.
-```javascript
-if (typeof task !== 'string') return next({ status: 400, message: `Task must be a string.` });
-```
-
-### Add controller function tests for invalid `task` parameters
-
-Add new parameterised tests providing each test with a `task` and `errorMessage` parameter.
-```javascript
-test.each([
-    [undefined, 'No task was provided.'],
-    ['', 'No task was provided.'],
-    [212, 'Task must be a string.'],
-    [true, 'Task must be a string.'],
-  ])('should return status 400 and an appropriate error message when passed task, "%s" in the request body', async (task, errorMessage) => {
-    // Arrange
-    const mReq = {
-      body: {
-        task
-      }
-    };
-    const mRes = {
-      status: jest.fn().mockReturnThis(),
-      json: jest.fn()
-    };
-    const mNext = jest.fn();
-
-    // Act
-    await addTodo(mReq, mRes, mNext);
-
-    // Assert
-    expect(mRes.status).not.toHaveBeenCalled();
-    expect(mNext).toHaveBeenCalledWith({ status: 400, message: errorMessage });
-    expect(mNext.mock.calls[0][0].status).toBe(400);
-    expect(mNext.mock.calls[0][0].message).toBe(errorMessage);
-  })
-```
 
 ## POST /todos 3 - Add the addTodo route and write integration tests
 

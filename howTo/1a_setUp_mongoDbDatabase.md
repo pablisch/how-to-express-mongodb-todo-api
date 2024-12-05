@@ -88,4 +88,4 @@ Click on that database to see the database which of course, will be empty.
 | <img src="howToImages/step1Images_mongoDb/16.mongoDbViewNewDatabase.png" alt="New database view" width="900" /> |
 |-----------------------------------------------------------------------------------------------------------------|
 
-[NEXT: Setting up the repository](2.setUpTheRepository)
+[NEXT: Setting up the repository](1b_setUp_repository)

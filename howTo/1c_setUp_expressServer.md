@@ -49,4 +49,4 @@ In the package.json file, add the following scripts:
 npm start
 ```
 
-[NEXT: Creating a todos schema and seed data file](4.creatingTheTodoSchemaAndSeeds)
+[NEXT: Creating a todos schema and seed data file](1d_setUp_todoSchemaAndSeeds)

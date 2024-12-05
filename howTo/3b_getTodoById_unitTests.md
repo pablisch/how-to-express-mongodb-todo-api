@@ -55,7 +55,7 @@ test.each([
 - the `_id` property needs to be made into a string to be compared to our expected string
 - we assert that the `createdAt` and `updatedAt` properties are instances of date but there is no need to do more than this or to keep asserting this for every test
 
-## Unhappy route tests
+## Unit testing validation and error handling
 
 We also test our validation by running function calls that should fail and asserting the message that we receive and the code that is returned. Again, inside the `getTodoById` describe block:
 
@@ -91,4 +91,4 @@ We also test our validation by running function calls that should fail and asser
 
 This series of tests covers `_id`s that are not in the database as well as `string` and a `boolean` being passed in as an `_id`. This is not exhaustive but runs a line between good coverage and over-testing.
 
-[NEXT: GET /todos/:id endpoint integration tests](14.getTodoByIdEndpointIntegrationTests.md)
+[NEXT: GET /todos/:id endpoint integration tests](3c_getTodoById_integrationTests)

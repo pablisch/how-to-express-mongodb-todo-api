@@ -65,4 +65,4 @@ const todosSeedData = [
 module.exports = todosSeedData
 ```
 
-[NEXT: Setting up a database connection as a function](5.databaseConnection.md)
+[NEXT: Setting up a database connection as a function](1e_setUp_databaseConnection)
