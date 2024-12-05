@@ -95,5 +95,4 @@ describe('getAllTodos()', () => {
 npm test
 ```
 
-All tests should pass.
-
+[NEXT: GET /todos endpoint integration tests](2d_getTodos_integrationTests.md)

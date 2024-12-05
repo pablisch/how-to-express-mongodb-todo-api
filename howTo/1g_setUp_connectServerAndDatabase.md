@@ -111,10 +111,10 @@ And we are back to the final code shown at the beginning of this chapter with no
 
 NEXT UP:
 
-[GET /todos route in app.js (simple step by step version)](2a_getTodos_stepByStep)
+[GET /todos route in app.js (simple step by step version)](2a_getTodos_stepByStep.md)
 
 OR
 
-[GET /todos route as controller function and route](2b_getTodos_StraightToController)
+[GET /todos route as controller function and route](2b_getTodos_StraightToController.md)
 
 **NOTE:** Both steps will end up with the same result. If you choose the first option (app.js) then this will be refactored into a controller function and route.

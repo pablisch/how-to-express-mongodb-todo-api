@@ -44,7 +44,7 @@ test.each([
 })
 ```
 
-[NEXT: Add the POST /todos endpoint](4a_createTodo_endpoint)
+[NEXT: Add the POST /todos endpoint](4a_createTodo_endpoint.md)
 
 ### Final GET /todos/:id integration test code
 
@@ -79,3 +79,5 @@ describe('GET /todos/:id', () => {
     })
 })
 ```
+
+[NEXT: Add the POST /todos endpoint](4a_createTodo_endpoint.md)

@@ -27,25 +27,25 @@ The purpose of this project as a guide, not to run the API, but should you wish 
 
 1. [Setting up a MongoDB database and connecting to MongoDB Compass](howTo/1a_setUp_mongoDbDatabase.md)
 2. [Setting up the repository](howTo/1b_setUp_repository.md)
-3. [Setting up a basic Express server](howTo/1c_setUp_expressServer)
-4. [Creating the Todo schema and seeds](howTo/1d_setUp_todoSchemaAndSeeds)
-5. [Set up the database connection](howTo/1e_setUp_databaseConnection)
-6. [Create the seeding function and scripts](howTo/1f_setUp_seedingFunctions)
-7. [Connect the server and the database in server.js](howTo/1g_setUp_connectServerAndDatabase)
+3. [Setting up a basic Express server](howTo/1c_setUp_expressServer.md)
+4. [Creating the Todo schema and seeds](howTo/1d_setUp_todoSchemaAndSeeds.md)
+5. [Set up the database connection](howTo/1e_setUp_databaseConnection.md)
+6. [Create the seeding function and scripts](howTo/1f_setUp_seedingFunctions.md)
+7. [Connect the server and the database in server.js](howTo/1g_setUp_connectServerAndDatabase.md)
 
 
    **Basic step-by-step server setup leading up top controllers**
 
-8. [Add a basic GET /todos endpoint in app.js then refactor](howTo/2a_getTodos_stepByStep)
+8. [Add a basic GET /todos endpoint in app.js then refactor](howTo/2a_getTodos_stepByStep.md)
 
  
    **Straight to controllers and routes**
 
-9. [Add the GET /todos endpoint (directly as controller function and route)](howTo/2b_getTodos_StraightToController)
+9. [Add the GET /todos endpoint (directly as controller function and route)](howTo/2b_getTodos_StraightToController.md)
 
 
-10. [getAllTodos controller function unit test](howTo/2c_getTodos_UnitTests)
-11. [GET /todos integration tests](howTo/2d_getTodos_integrationTests)
+10. [getAllTodos controller function unit test](howTo/2c_getTodos_UnitTests.md)
+11. [GET /todos integration tests](howTo/2d_getTodos_integrationTests.md)
 
 
 -----

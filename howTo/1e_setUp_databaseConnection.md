@@ -46,4 +46,4 @@ module.exports = connectToDatabase
 - `connectToDatabase` takes the param `logSuccess` because console logging in tests causes issues and this allows me to stop any logging that creates 'noise' when running tests. It also provides a mechanism to stop `process.exit()` when reseeding which will see soon.
 - There is no need to console log any connection message on success but it can be useful when starting out and especially useful to be explicitly sure what database you have connected to.
 
-[NEXT: Creating seeding functions and scripts](1f_setUp_seedingFunctions)
+[NEXT: Creating seeding functions and scripts](1f_setUp_seedingFunctions.md)

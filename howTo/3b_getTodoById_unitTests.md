@@ -96,7 +96,7 @@ Test validation and error handling for:
 })
 ```
 
-[NEXT: GET /todos/:id endpoint integration tests](3c_getTodoById_integrationTests)
+[NEXT: GET /todos/:id endpoint integration tests](3c_getTodoById_integrationTests.md)
 
 ### Final getTodoById unit test code
 
@@ -162,3 +162,5 @@ describe('getTodoById()', () => {
     })
 })
 ```
+
+[NEXT: GET /todos/:id endpoint integration tests](3c_getTodoById_integrationTests.md)

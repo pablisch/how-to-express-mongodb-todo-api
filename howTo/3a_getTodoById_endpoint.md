@@ -68,4 +68,4 @@ router.get('/:id', getTodoById)
 
 **NOTE:** Since we have `app.use('/todos', todoRoutes)` in `app.js`, nothing needs to be added there either.
 
-[NEXT: Writing unit tests for the getTodoById controller function](3b_getTodoById_unitTests)
+[NEXT: getTodoById controller unit tests](3b_getTodoById_unitTests.md)
