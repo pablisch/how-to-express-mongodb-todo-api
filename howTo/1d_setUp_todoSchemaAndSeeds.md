@@ -66,3 +66,46 @@ module.exports = todosSeedData
 ```
 
 [NEXT: Setting up a database connection as a function](1e_setUp_databaseConnection.md)
+
+## Final code for this section
+
+### Final models/todo.js code
+
+```javascript
+const mongoose = require('mongoose')
+
+const todoSchema = new mongoose.Schema({
+  task: { type: String, required: true },
+  completed: { type: Boolean, required: true },
+}, {
+  timestamps: true
+})
+
+module.exports = mongoose.model('Todo', todoSchema)
+```
+
+### The final seed/todosSeedData.js code
+
+```javascript
+const todosSeedData = [
+    {
+        _id: '123456789012345678901234',
+        task: "Eat",
+        completed: true,
+    },
+    {
+        _id: '234567890123456789012345',
+        task: "Sleep",
+        completed: false,
+    },
+    {
+        _id: '345678901234567890123456',
+        task: "Pray",
+        completed: false,
+    }
+]
+
+module.exports = todosSeedData
+```
+
+[NEXT: Setting up a database connection as a function](1e_setUp_databaseConnection.md)
