@@ -1,4 +1,4 @@
-# Connect to the server to the database
+# Connect the server to the database
 
 We now have a basic Express server, a MongoDB database and a database connection function. Now we bring them together:
 
@@ -27,11 +27,11 @@ There is no further development in thsi chapter and you can move straight on. Al
 
 NEXT UP:
 
-[GET /todos route in app.js (simple step by step version)](2a_getTodos_stepByStep)
+[GET /todos route in app.js (simple step by step version)](2a_getTodos_stepByStep.md)
 
 OR
 
-[GET /todos route as controller function and route](2b_getTodos_StraightToController)
+[GET /todos route as controller function and route](2b_getTodos_StraightToController.md)
 
 **NOTE:** Both steps will end up with the same result. If you choose the first option (app.js) then this will be refactored into a controller function and route.
 
