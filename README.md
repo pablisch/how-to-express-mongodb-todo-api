@@ -25,8 +25,8 @@ The purpose of this project as a guide, not to run the API, but should you wish 
 
 ## Contents
 
-1. [Setting up a MongoDB database and connecting to MongoDB Compass](howTo/1a_setUp_mongoDbDatabase)
-2. [Setting up the repository](howTo/1b_setUp_repository)
+1. [Setting up a MongoDB database and connecting to MongoDB Compass](howTo/1a_setUp_mongoDbDatabase.md)
+2. [Setting up the repository](howTo/1b_setUp_repository.md)
 3. [Setting up a basic Express server](howTo/1c_setUp_expressServer)
 4. [Creating the Todo schema and seeds](howTo/1d_setUp_todoSchemaAndSeeds)
 5. [Set up the database connection](howTo/1e_setUp_databaseConnection)
