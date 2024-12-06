@@ -1,8 +1,7 @@
 # Add the POST /todos endpoint
 
-## Create the basic createTodo controller function
+## Write the basic createTodo controller function
 
-In the todoController.js file, create the `addTodo` function:
 ```javascript
 exports.createTodo = async (req, res, next) => {
     const { task } = req.body
@@ -21,23 +20,26 @@ exports.createTodo = async (req, res, next) => {
 
 ## Add validation for createTodo
 
-The `task` property is all that is needed to create a todo but there are still several things that we need to validate and add error handling for:
+The `task` property is all that is needed to create a todo. We will need to validate and handle errors for:
 - the `task` property passed in must not be an empty string
 - there must be a task passed in
 - `task` must be of type `string`
 **NOTE:** Since a check for no `task` will include an empty string as meaning there is no `task`, we need to check for an empty string first if we want to be specific in the error message passed back.
 
 For `task` being an empty string:
+
 ```javascript
 if (task === '') return next({ status: 400, message: "The task property cannot be an empty string" })
 ```
 
 For no `task` being passed in:
+
 ```javascript
 if (!task) return next({ status: 400, message: `No task was provided` })
 ```
 
 For `task` not being a string:
+
 ```javascript
 if (typeof task !== 'string') return next({status: 400, message: `Task must be a string but type ${typeof(task)} was given`})
 ```
