@@ -2,6 +2,12 @@
 
 [Jump to complete test code](#final-updatetodo-happy-path-unit-test-code)
 
+[tests for `task` and `completed` properties](#happy-route-unit-tests-for-both-task-and-completed)
+
+[tests for `task` property only](#happy-route-unit-tests-for-task-only)
+
+[tests for `completed` property only](#happy-route-unit-tests-for-completed-only)
+
 **NOTE:** As the testing for the `PATCH` endpoint is considerably longer than other endpoints, both the unit and integration sections have been split into `happy path` and `error handling` tests.
 
 Add the `updateTodo` function to the existing imports:
@@ -18,7 +24,7 @@ describe('updateTodo()', () => {
 })
 ```
 
-## Add 'happy route' unit tests for when both `task` and `completed` are being updated
+## 'Happy route' unit tests for both `task` and `completed`
 
 ```javascript
 test.each([
@@ -53,7 +59,7 @@ test.each([
 })
 ```
 
-## Add 'happy route' unit tests for when only `task` is being updated
+## 'Happy route' unit tests for `task` only
 
 ```javascript
 test.each([
@@ -90,7 +96,7 @@ test.each([
 
 **NOTE:** Initially, I still passed in the current `completed` values to assert that they had not changed. At some point I decided to only pass in the `task` and assert that the `completed` value was not undefined. In some ways, the original test is more thorough but it does make the test bound to the test data which seems unnecessary.
 
-## Add 'happy route' unit tests for when only `completed` is being updated
+## 'Happy route' unit tests for `completed` only
 
 ```javascript
 test.each([
