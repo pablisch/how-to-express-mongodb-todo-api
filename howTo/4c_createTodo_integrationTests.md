@@ -13,14 +13,14 @@ describe('POST /todos', () => {
 ## Add 'happy route' tests
 
 ```javascript
-test.each(['Climb', 'Swim', 'Climb a tree'])('should add a todo to the database and return status 201 and an array containing the created todo object', async (task) => {
+test.each(['Climb', 'Swim', 'Climb a tree'])('should add a todo to the database and return status 201 and the created todo object when passed the todo: "%s"', async (task) => {
     // Act
-    const response = await request(app).post('/todos').send({ task });
+    const response = await request(app).post('/todos').send({ task })
 
     // Assert
-    expect(response.status).toBe(201);
-    expect(response.body.task).toBe(task);
-    expect(response.body.completed).toBe(false);
+    expect(response.status).toBe(201)
+    expect(response.body.task).toBe(task)
+    expect(response.body.completed).toBe(false)
 })
 ```
 
@@ -33,9 +33,9 @@ test.each([
     [212, 'Task must be a string but type number was given'],
     [["Hello world"], 'Task must be a string but type object was given'],
     [true, 'Task must be a string but type boolean was given'],
-])('should return status 400 and an appropriate error message when given task value of %s', async (task, errorMessage) => {
+])('should return status 400 and an appropriate error message when given task value: "%s"', async (task, errorMessage) => {
     // Act
-    const response = await request(app).post('/todos').send({ task });
+    const response = await request(app).post('/todos').send({ task })
 
     // Assert
     expect(response.status).toBe(400)
@@ -49,14 +49,14 @@ test.each([
 
 ```javascript
 describe('POST /todos', () => {
-    test.each(['Climb', 'Swim', 'Climb a tree'])('should add a todo to the database and return status 201 and an array containing the created todo object', async (task) => {
+    test.each(['Climb', 'Swim', 'Climb a tree'])('should add a todo to the database and return status 201 and the created todo object when passed the todo: "%s"', async (task) => {
         // Act
-        const response = await request(app).post('/todos').send({ task });
+        const response = await request(app).post('/todos').send({ task })
 
         // Assert
-        expect(response.status).toBe(201);
-        expect(response.body.task).toBe(task);
-        expect(response.body.completed).toBe(false);
+        expect(response.status).toBe(201)
+        expect(response.body.task).toBe(task)
+        expect(response.body.completed).toBe(false)
     })
 
     test.each([
@@ -65,9 +65,9 @@ describe('POST /todos', () => {
         [212, 'Task must be a string but type number was given'],
         [["Hello world"], 'Task must be a string but type object was given'],
         [true, 'Task must be a string but type boolean was given'],
-    ])('should return status 400 and an appropriate error message when given task value of %s', async (task, errorMessage) => {
+    ])('should return status 400 and an appropriate error message when given task value: "%s"', async (task, errorMessage) => {
         // Act
-        const response = await request(app).post('/todos').send({ task });
+        const response = await request(app).post('/todos').send({ task })
 
         // Assert
         expect(response.status).toBe(400)

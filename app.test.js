@@ -28,7 +28,7 @@ describe('App todo endpoints integration tests', () => {
       ['123456789012345678901234', 'Eat', true],
       ['234567890123456789012345', 'Sleep', false],
       ['345678901234567890123456', 'Pray', false]
-    ])('should return an array with a single todo and status 200 when called with an ID param of %s', async (id, task, completed) => {
+    ])('should return an array with a single todo and status 200 when called with an ID param: "%s"', async (id, task, completed) => {
       // Act
       const response = await request(app).get(`/todos/${id}`);
 
@@ -43,7 +43,7 @@ describe('App todo endpoints integration tests', () => {
       ['999999999999999999999999', 404, 'No todo with ID 999999999999999999999999 was found in the database'],
       ['dog', 400, "'dog' is not a valid todo ID"],
       [true, 400, "'true' is not a valid todo ID"]
-    ])('should return an appropriate status and error message when called with an ID param of %s', async (id, status, errorMessage) => {
+    ])('should return an appropriate status and error message when called with an ID param: "%s"', async (id, status, errorMessage) => {
       // Act
       const response = await request(app).get(`/todos/${id}`);
 
@@ -54,14 +54,14 @@ describe('App todo endpoints integration tests', () => {
   })
 
   describe('POST /todos', () => {
-    test.each(['Climb', 'Swim', 'Climb a tree'])('should add a todo to the database and return status 201 and an array containing the created todo object', async (task) => {
+    test.each(['Climb', 'Swim', 'Climb a tree'])('should add a todo to the database and return status 201 and the created todo object when passed the todo: "%s"', async (task) => {
       // Act
-      const response = await request(app).post('/todos').send({ task });
+      const response = await request(app).post('/todos').send({ task })
 
       // Assert
-      expect(response.status).toBe(201);
-      expect(response.body.task).toBe(task);
-      expect(response.body.completed).toBe(false);
+      expect(response.status).toBe(201)
+      expect(response.body.task).toBe(task)
+      expect(response.body.completed).toBe(false)
     })
 
     test.each([
@@ -70,9 +70,9 @@ describe('App todo endpoints integration tests', () => {
       [212, 'Task must be a string but type number was given'],
       [["Hello world"], 'Task must be a string but type object was given'],
       [true, 'Task must be a string but type boolean was given'],
-    ])('should return status 400 and an appropriate error message when given task value of %s', async (task, errorMessage) => {
+    ])('should return status 400 and an appropriate error message when given task value: "%s"', async (task, errorMessage) => {
       // Act
-      const response = await request(app).post('/todos').send({ task });
+      const response = await request(app).post('/todos').send({ task })
 
       // Assert
       expect(response.status).toBe(400)
@@ -85,7 +85,7 @@ describe('App todo endpoints integration tests', () => {
       ['123456789012345678901234', 'Eat', true],
       ['234567890123456789012345', 'Sleep', false],
       ['345678901234567890123456', 'Pray', false],
-    ])('should delete todo from database and return status 200 and an array with the deleted todo object with id, "%s"', async (id, task, completed) => {
+    ])('should delete todo from database, and return status 200 and a success message when called with id: "%s"', async (id, task, completed) => {
       // Act
       const response = await request(app).delete(`/todos/${id}`)
 
@@ -99,14 +99,14 @@ describe('App todo endpoints integration tests', () => {
       ['cat', 400, "'cat' is not a valid todo ID"],
       [true, 400, "'true' is not a valid todo ID"],
       ['999999999999999999999999', 404, 'No todo with ID 999999999999999999999999 was found in the database'],
-    ])('should return an appropriate status and error message when passed the ID param, "%s"', async (id, status, errorMessage) => {
+    ])('should return an appropriate status and error message when called with the id: "%s"', async (id, status, errorMessage) => {
       // Act
-      const response = await request(app).delete(`/todos/${id}`);
+      const response = await request(app).delete(`/todos/${id}`)
 
       // Assert
-      expect(response.status).toBe(status);
-      expect(response.body.message).toBe(errorMessage);
-      expect(response.body).toEqual({ message: errorMessage });
+      expect(response.status).toBe(status)
+      expect(response.body.message).toBe(errorMessage)
+      expect(response.body).toEqual({ message: errorMessage })
     })
   });
 

@@ -15,7 +15,7 @@ test.each([
     ['123456789012345678901234', 'Eat', true],
     ['234567890123456789012345', 'Sleep', false],
     ['345678901234567890123456', 'Pray', false]
-])('should return an array with a single todo and status 200 when called with an ID param of %s', async (id, task, completed) => {
+])('should return an array with a single todo and status 200 when called with an ID param: "%s"', async (id, task, completed) => {
     // Act
     const response = await request(app).get(`/todos/${id}`);
 
@@ -34,7 +34,7 @@ test.each([
     ['999999999999999999999999', 404, 'No todo with ID 999999999999999999999999 was found in the database'],
     ['dog', 400, "'dog' is not a valid todo ID"],
     [true, 400, "'true' is not a valid todo ID"]
-])('should return an appropriate status and error message when called with an ID param of %s', async (id, status, errorMessage) => {
+])('should return an appropriate status and error message when called with an ID param: "%s"', async (id, status, errorMessage) => {
     // Act
     const response = await request(app).get(`/todos/${id}`);
 
@@ -54,7 +54,7 @@ describe('GET /todos/:id', () => {
         ['123456789012345678901234', 'Eat', true],
         ['234567890123456789012345', 'Sleep', false],
         ['345678901234567890123456', 'Pray', false]
-    ])('should return an array with a single todo and status 200 when called with an ID param of %s', async (id, task, completed) => {
+    ])('should return an array with a single todo and status 200 when called with an ID param: "%s"', async (id, task, completed) => {
         // Act
         const response = await request(app).get(`/todos/${id}`);
 
@@ -69,7 +69,7 @@ describe('GET /todos/:id', () => {
         ['999999999999999999999999', 404, 'No todo with ID 999999999999999999999999 was found in the database'],
         ['dog', 400, "'dog' is not a valid todo ID"],
         [true, 400, "'true' is not a valid todo ID"]
-    ])('should return an appropriate status and error message when called with an ID param of %s', async (id, status, errorMessage) => {
+    ])('should return an appropriate status and error message when called with an ID param: "%s"', async (id, status, errorMessage) => {
         // Act
         const response = await request(app).get(`/todos/${id}`);
 
