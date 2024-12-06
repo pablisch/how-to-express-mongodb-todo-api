@@ -6,8 +6,8 @@ const seedTodos = require('./seed/seedTodos')
 
 describe('App todo endpoints integration tests', () => {
   beforeEach(async () => {
-    await seedTodos(false);
-  });
+    await seedTodos(false)
+  })
 
   describe('GET /todos', () => {
     test('should return an array of all todos and status 200', async () => {
@@ -108,7 +108,7 @@ describe('App todo endpoints integration tests', () => {
       expect(response.body.message).toBe(errorMessage)
       expect(response.body).toEqual({ message: errorMessage })
     })
-  });
+  })
 
   describe('PATCH /todos/:id', () => {
     test.each([
