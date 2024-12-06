@@ -50,22 +50,26 @@ The purpose of this project as a guide, not to run the API, but should you wish 
 2. [getTodoById_controller unit tests](howTo/3b_getTodoById_unitTests.md)
 3. [GET /todos/:id_endpoint_integration tests](howTo/3c_getTodoById_integrationTests.md)
 
+### POST /todos
+
+1. [POST /todos_endpoint](howTo/4a_createTodo_endpoint.md)
+2. [createTodo_controller unit tests](howTo/4b_createTodo_unitTests.md)
+3. [POST /todos_endpoint_integration tests](howTo/4c_createTodo_integrationTests.md)
+
+### DELETE /todos/:id
+
+1. [DELETE /todos/:id_endpoint](howTo/5a_deleteTodo_endpoint.md)
+2. [deleteTodo_controller unit tests](howTo/5b_deleteTodo_unitTests.md)
+3. [DELETE /todos/:id_endpoint_integration tests](howTo/5c_deleteTodo_integrationTests.md)
+
+### PATCH /todos/:id
+
+1. [PATCH /todos/:id_endpoint](howTo/6a_updateTodo_endpoint.md)
+2. [updateTodo_controller unit tests](howTo/6b_updateTodo_unitTests.md)
+3. [PATCH /todos/:id_endpoint_integration tests](howTo/6c_updateTodo_integrationTests.md)
+
 -----
 
-1. [Setting up the repository](#setting-up-the-repository)
-2. [Setting up the database](#setting-up-the-database)
-3. [Prepare for using the database in the API](#prepare-for-using-the-database-in-the-api)
-4. [Server 1 - Basic Server Setup](#server-1---basic-server-setup)
-5. [Server 2 - Middleware and First Route](#server-2---middleware-and-first-route)
-6. [GET /todos 1 - First Todo Route](#get-todos-1---first-todo-route)
-7. [GET /todos 2 - Refactor the todo route](#get-todos-2---refactor-the-todo-route)
-8. [GET /todos 3 - Add the first controller function unit test](#get-todos-3---add-the-first-controller-function-unit-test)
-9. [GET /todos/:id 1 - Basic getTodoById controller function and unit test](#get-todosid-1---basic-gettodobyid-controller-function-and-unit-test)
-10. [GET /todos/:id 2 - Error handling in the getTodoById controller function and unit testing errors](#get-todosid-2---error-handling-in-the-gettodobyid-controller-function-and-unit-testing-errors)
-11. [GET /todos/:id 3 - Add the single todo route and write integration tests](#get-todosid-3---add-the-single-todo-route-and-write-integration-tests)
-12. [POST /todos 1 - Basic addTodo controller function and unit tests](#post-todos-1---basic-addtodo-controller-function-and-unit-tests)
-13. [POST /todos 2 - Error handling in the addTodo controller function and unit testing errors](#post-todos-2---error-handling-in-the-addtodo-controller-function-and-unit-testing-errors)
-14. [POST /todos 3 - Add the addTodo route and write integration tests](#post-todos-3---add-the-addtodo-route-and-write-integration-tests)
 15. [DELETE /todos/:id 1 - Basic deleteTodo controller function and unit tests](#delete-todosid-1---basic-deletetodo-controller-function-and-unit-tests)
 16. [DELETE /todos/:id 2 - Error handling in the deleteTodo controller function and unit testing errors](#delete-todosid-2---error-handling-in-the-deletetodo-controller-function-and-unit-testing-errors)
 17. [DELETE /todos/:id 3 - Add the deleteTodo route and write integration tests](#delete-todosid-3---add-the-deletetodo-route-and-write-integration-tests)
