@@ -7,17 +7,16 @@ const app = require('./app')
 const port = process.env.PORT || 3000
 const connectToDatabase = require('./db')
 
-
 ;(async () => {
-    try {
-        await connectToDatabase()
-        app.listen(port, () => {
-            console.log(`Server listening on port ${port}`)
-        })
-    } catch (error) {
-        console.error("Failed to start the server:", error)
-        process.exit(1)
-    }
+  try {
+    await connectToDatabase()
+    app.listen(port, () => {
+      console.log(`Server listening on port ${port}`)
+    })
+  } catch (error) {
+    console.error('Failed to start the server:', error)
+    process.exit(1)
+  }
 })()
 ```
 
@@ -53,6 +52,7 @@ app.listen(port, () => {
 The minimal step to add the database connection would be to import the connection function and call it:
 
 **EXAMPLE CODE NOT USED IN THIS APP**
+
 ```javascript
 const app = require('./app')
 const port = process.env.PORT || 3000
@@ -61,11 +61,12 @@ const connectToDatabase = require('./db')
 connectToDatabase()
 
 app.listen(port, () => {
-    console.log(`Server running on port ${port}`)
+  console.log(`Server running on port ${port}`)
 })
 ```
 
 This would work but:
+
 - there is a separation between the connection to the database and the server starting when both are fundamental to the app working
 - the async function, `connectToDatabase`, is being called without await since `await is only valid in async functions and the top level bodies of modules`
 
@@ -81,8 +82,8 @@ const startServer = async () => {
       console.log(`Server listening on port ${port}`)
     })
   } catch (error) {
-    console.error("Failed to start the server:", error)
-    process.exit(1);
+    console.error('Failed to start the server:', error)
+    process.exit(1)
   }
 }
 
@@ -95,19 +96,20 @@ Here, there is a single function with error handling but it still calls the `asy
 
 ```javascript
 ;(async () => {
-    try {
-        await connectToDatabase()
-        app.listen(port, () => {
-            console.log(`Server listening on port ${port}`)
-        })
-    } catch (error) {
-        console.error("Failed to start the server:", error)
-        process.exit(1)
-    }
+  try {
+    await connectToDatabase()
+    app.listen(port, () => {
+      console.log(`Server listening on port ${port}`)
+    })
+  } catch (error) {
+    console.error('Failed to start the server:', error)
+    process.exit(1)
+  }
 })()
 ```
 
 **NOTES:**
+
 - This is an IIFE (immediately invoked function expression)
 - The preceeding `;` stops the function from being joined to the preceeding import call and causing an error. Where lines end in a `;` anyway, this is not an issue. As I often use a prettier setting to remove end of line punctuation, this becomes essential.
 
@@ -131,17 +133,16 @@ const port = process.env.PORT || 3000
 const connectToDatabase = require('./db')
 
 ;(async () => {
-    try {
-        await connectToDatabase()
-        app.listen(port, () => {
-            console.log(`Server listening on port ${port}`)
-        })
-    } catch (error) {
-        console.error("Failed to start the server:", error)
-        process.exit(1)
-    }
+  try {
+    await connectToDatabase()
+    app.listen(port, () => {
+      console.log(`Server listening on port ${port}`)
+    })
+  } catch (error) {
+    console.error('Failed to start the server:', error)
+    process.exit(1)
+  }
 })()
-
 ```
 
 NEXT UP:

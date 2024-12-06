@@ -1,6 +1,7 @@
 # Creating database seeding functions and scripts
 
 In the file, `seedTodos.js`, import the `Todo` schema, `todoSeedData` and the database connection function:
+
 ```javascript
 const Todo = require('../models/todo')
 const todoSeedData = require('./todosSeedData')
@@ -8,13 +9,14 @@ const connectToDatabase = require('../db')
 ```
 
 Next, write functions to clear the database and write the seed data:
+
 ```javascript
 const clearTodos = async () => {
-    await Todo.deleteMany({});
+  await Todo.deleteMany({})
 }
 
 const insertTodos = async () => {
-    await Todo.insertMany(todoSeedData);
+  await Todo.insertMany(todoSeedData)
 }
 ```
 
@@ -24,16 +26,16 @@ Write the seeding function:
 
 ```javascript
 const seedTodos = async (logSuccess = true) => {
-    try {
-        await connectToDatabase(logSuccess)
-        await clearTodos();
-        await insertTodos();
-        if (logSuccess) console.log('Todo seeding completed successfully.')
-    } catch (error) {
-        console.error('Todo seeding failed:', error)
-    } finally {
-        if (logSuccess) process.exit(0)
-    }
+  try {
+    await connectToDatabase(logSuccess)
+    await clearTodos()
+    await insertTodos()
+    if (logSuccess) console.log('Todo seeding completed successfully.')
+  } catch (error) {
+    console.error('Todo seeding failed:', error)
+  } finally {
+    if (logSuccess) process.exit(0)
+  }
 }
 ```
 
@@ -52,6 +54,7 @@ I also added some comments at the end as a reminder of use and the scripts that 
 ```
 
 **NOTE:**
+
 - The `logSuccess` param (mentioned previously) allows for logging to be suspended for successful calls as this works much better for re-seeding in tests.
 - `logSuccess` since is it only used in test re-seeding, also stops the `process.exit(0)` call which would stop tests from running.
 
@@ -65,16 +68,17 @@ In `callSeedTodos.js`, import the `seedTodos` function and call it:
 const seedTodos = require('./seedTodos')
 
 ;(async () => {
-    try {
-        await seedTodos()
-        console.log("Seeding completed successfully 🌱")
-    } catch (error) {
-        console.error("Seeding failed:", error)
-    }
+  try {
+    await seedTodos()
+    console.log('Seeding completed successfully 🌱')
+  } catch (error) {
+    console.error('Seeding failed:', error)
+  }
 })()
 ```
 
-**NOTE:** 
+**NOTE:**
+
 - This could simply be `seedTodos` but this calls the function without an `await`
 - This way is longer and not so readable but:
   - it includes error handling
@@ -87,6 +91,7 @@ const seedTodos = require('./seedTodos')
 The seeding scripts themselves will go in the `package.json` file.
 
 In the `scripts` section, add:
+
 ```bash
 "seed:todos:dev": "node seed/callSeedTodos.js",
 "seed:todos:test": "MONGODB_DATABASE_NAME=todo_TEST node seed/callSeedTodos.js"
@@ -109,18 +114,18 @@ const todoSeedData = require('./todosSeedData')
 const connectToDatabase = require('../db')
 
 const clearTodos = async () => {
-  await Todo.deleteMany({});
+  await Todo.deleteMany({})
 }
 
 const insertTodos = async () => {
-  await Todo.insertMany(todoSeedData);
+  await Todo.insertMany(todoSeedData)
 }
 
 const seedTodos = async (logSuccess = true) => {
   try {
     await connectToDatabase(logSuccess)
-    await clearTodos();
-    await insertTodos();
+    await clearTodos()
+    await insertTodos()
     if (logSuccess) console.log('Todo seeding completed successfully.')
   } catch (error) {
     console.error('Todo seeding failed:', error)
@@ -134,7 +139,6 @@ module.exports = seedTodos
 // for TEST db => npm run seed:todos:test
 // for dev/production db => npm run seed:todos:dev
 // when used for testing seeding, pass in logSuccess as false
-
 ```
 
 ### seed/callSeedTodos.js
@@ -145,9 +149,9 @@ const seedTodos = require('./seedTodos')
 ;(async () => {
   try {
     await seedTodos()
-    console.log("Seeding completed successfully 🌱")
+    console.log('Seeding completed successfully 🌱')
   } catch (error) {
-    console.error("Seeding failed:", error)
+    console.error('Seeding failed:', error)
   }
 })()
 ```

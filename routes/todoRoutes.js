@@ -1,7 +1,13 @@
 const { Router } = require('express')
 const router = Router()
 
-const { getAllTodos, getTodoById, createTodo, deleteTodo, updateTodo } = require('../controllers/todoController')
+const {
+  getAllTodos,
+  getTodoById,
+  createTodo,
+  deleteTodo,
+  updateTodo,
+} = require('../controllers/todoController')
 
 router.get('/', getAllTodos)
 

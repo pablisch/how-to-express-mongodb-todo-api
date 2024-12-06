@@ -3,24 +3,24 @@ const todoSeedData = require('./todosSeedData')
 const connectToDatabase = require('../db')
 
 const clearTodos = async () => {
-    await Todo.deleteMany({});
+  await Todo.deleteMany({})
 }
 
 const insertTodos = async () => {
-    await Todo.insertMany(todoSeedData);
+  await Todo.insertMany(todoSeedData)
 }
 
 const seedTodos = async (logSuccess = true) => {
-    try {
-        await connectToDatabase(logSuccess)
-        await clearTodos();
-        await insertTodos();
-        if (logSuccess) console.log('Todo seeding completed successfully.')
-    } catch (error) {
-        console.error('Todo seeding failed:', error)
-    } finally {
-        if (logSuccess) process.exit(0)
-    }
+  try {
+    await connectToDatabase(logSuccess)
+    await clearTodos()
+    await insertTodos()
+    if (logSuccess) console.log('Todo seeding completed successfully.')
+  } catch (error) {
+    console.error('Todo seeding failed:', error)
+  } finally {
+    if (logSuccess) process.exit(0)
+  }
 }
 
 module.exports = seedTodos

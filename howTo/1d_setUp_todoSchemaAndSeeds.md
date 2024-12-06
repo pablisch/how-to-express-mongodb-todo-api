@@ -13,20 +13,25 @@ const mongoose = require('mongoose')
 And create the schema model for `todos`:
 
 ```javascript
-const todoSchema = new mongoose.Schema({
+const todoSchema = new mongoose.Schema(
+  {
     task: { type: String, required: true },
     completed: { type: Boolean, required: true },
-}, {
-    timestamps: true
-})
+  },
+  {
+    timestamps: true,
+  },
+)
 ```
 
 Finally, export the schema:
+
 ```javascript
 module.exports = mongoose.model('Todo', todoSchema)
 ```
 
 **NOTES:**
+
 - `Mongoose` is an Object Document Mapper for MongoDB and Node, which makes it easier to work with a NoSQL database such as MongoDB
 - `todoSchema` is a new `mongoose.Schema` object
 - The `todoSchema` `mongoose.Schema` object takes two arguments:
@@ -45,21 +50,21 @@ Example for `todosSeedData.js`:
 
 ```javascript
 const todosSeedData = [
-    {
-        _id: '123456789012345678901234',
-        task: "Eat",
-        completed: true,
-    },
-    {
-        _id: '234567890123456789012345',
-        task: "Sleep",
-        completed: false,
-    },
-    {
-        _id: '345678901234567890123456',
-        task: "Pray",
-        completed: false,
-    }
+  {
+    _id: '123456789012345678901234',
+    task: 'Eat',
+    completed: true,
+  },
+  {
+    _id: '234567890123456789012345',
+    task: 'Sleep',
+    completed: false,
+  },
+  {
+    _id: '345678901234567890123456',
+    task: 'Pray',
+    completed: false,
+  },
 ]
 
 module.exports = todosSeedData
@@ -74,12 +79,15 @@ module.exports = todosSeedData
 ```javascript
 const mongoose = require('mongoose')
 
-const todoSchema = new mongoose.Schema({
-  task: { type: String, required: true },
-  completed: { type: Boolean, required: true },
-}, {
-  timestamps: true
-})
+const todoSchema = new mongoose.Schema(
+  {
+    task: { type: String, required: true },
+    completed: { type: Boolean, required: true },
+  },
+  {
+    timestamps: true,
+  },
+)
 
 module.exports = mongoose.model('Todo', todoSchema)
 ```
@@ -88,21 +96,21 @@ module.exports = mongoose.model('Todo', todoSchema)
 
 ```javascript
 const todosSeedData = [
-    {
-        _id: '123456789012345678901234',
-        task: "Eat",
-        completed: true,
-    },
-    {
-        _id: '234567890123456789012345',
-        task: "Sleep",
-        completed: false,
-    },
-    {
-        _id: '345678901234567890123456',
-        task: "Pray",
-        completed: false,
-    }
+  {
+    _id: '123456789012345678901234',
+    task: 'Eat',
+    completed: true,
+  },
+  {
+    _id: '234567890123456789012345',
+    task: 'Sleep',
+    completed: false,
+  },
+  {
+    _id: '345678901234567890123456',
+    task: 'Pray',
+    completed: false,
+  },
 ]
 
 module.exports = todosSeedData

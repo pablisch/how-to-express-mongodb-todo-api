@@ -10,20 +10,22 @@ const mongoose = require('mongoose')
 ```
 
 Then, add the simple controller function
+
 ```javascript
 exports.getAllTodos = async (req, res, next) => {
-    try {
-        const todos = await Todo.find()
-        res.status(200).json(todos)
-    } catch (error) {
-        next(error)
-    }
+  try {
+    const todos = await Todo.find()
+    res.status(200).json(todos)
+  } catch (error) {
+    next(error)
+  }
 }
 ```
 
 ## Create the todo route
 
 In the routes/todoRoutes.js file, import the express router and the todo controller, create the router, and export it:
+
 ```javascript
 const { Router } = require('express')
 const router = Router()
@@ -34,6 +36,7 @@ module.exports = router
 ```
 
 Between the imports and export, add the first route:
+
 ```javascript
 router.get('/', getAllTodos)
 ```
@@ -43,16 +46,19 @@ router.get('/', getAllTodos)
 ## Import and use the todo route into app.js
 
 In the app.js file, import the todo route as `todoRoutes` with the other imports:
+
 ```javascript
 const todoRoutes = require('./routes/todoRoutes')
 ```
 
 Use`todoRoutes` between the single home route and the `next` error handling middleware:
+
 ```javascript
 app.use('/todos', todoRoutes)
 ```
 
 The `app.js` file should now look ike this:
+
 ```javascript
 const express = require('express')
 const todoRoutes = require('./routes/todoRoutes')
@@ -64,8 +70,8 @@ app.use(express.json())
 app.use('/todos', todoRoutes)
 
 app.use((err, req, res, next) => {
-    const status = err.status || 500
-    res.status(status).json({ message: err.message })
+  const status = err.status || 500
+  res.status(status).json({ message: err.message })
 })
 
 module.exports = app
@@ -89,8 +95,8 @@ app.use(express.json())
 app.use('/todos', todoRoutes)
 
 app.use((err, req, res, next) => {
-    const status = err.status || 500
-    res.status(status).json({ message: err.message })
+  const status = err.status || 500
+  res.status(status).json({ message: err.message })
 })
 
 module.exports = app
@@ -116,12 +122,12 @@ const Todo = require('../models/todo')
 const mongoose = require('mongoose')
 
 exports.getAllTodos = async (req, res, next) => {
-    try {
-        const todos = await Todo.find()
-        res.status(200).json(todos)
-    } catch (error) {
-        next(error)
-    }
+  try {
+    const todos = await Todo.find()
+    res.status(200).json(todos)
+  } catch (error) {
+    next(error)
+  }
 }
 ```
 

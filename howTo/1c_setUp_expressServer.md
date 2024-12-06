@@ -10,16 +10,16 @@ const app = express()
 app.use(express.json())
 
 app.get('/', (req, res, next) => {
-    try {
-        res.status(200).json({message: "Home endpoint is working!"})
-    } catch (error) {
-        next (error)
-    }
+  try {
+    res.status(200).json({ message: 'Home endpoint is working!' })
+  } catch (error) {
+    next(error)
+  }
 })
 
 app.use((err, req, res, next) => {
-    const status = err.status || 500
-    res.status(status).json({ message: err.message })
+  const status = err.status || 500
+  res.status(status).json({ message: err.message })
 })
 
 module.exports = app
@@ -39,6 +39,7 @@ app.listen(PORT, () => {
 ## Write scripts for starting the server and running tests
 
 In the package.json file, add the following scripts:
+
 ```
 "scripts": {
   "start": "node --watch server.js",
@@ -68,25 +69,25 @@ app.use(express.json())
 // use json middleware to parse incoming JSON payloads. req.body will contain the parsed JSON object
 
 app.get('/', (req, res, next) => {
-// defines a route handler for a GET request at the root URL of '/'
-// the route handler takes a second argument - req, res and next
-    try {
+  // defines a route handler for a GET request at the root URL of '/'
+  // the route handler takes a second argument - req, res and next
+  try {
     // a try block is used to handle errors
-        res.status(200).json({message: "Home endpoint is working!"})
-        // the server responds with a response status of 200 and a JSON object with a message
-    } catch (error) {
+    res.status(200).json({ message: 'Home endpoint is working!' })
+    // the server responds with a response status of 200 and a JSON object with a message
+  } catch (error) {
     // server errors are caught by catch
-        next (error)
-        // in case of errors, the next middleware is called with the error
-    }
+    next(error)
+    // in case of errors, the next middleware is called with the error
+  }
 })
 
 app.use((err, req, res, next) => {
-// next middleware id configured to handle errors
-    const status = err.status || 500
-    // the status will be the status property of err if given or 500 by default
-    res.status(status).json({ message: err.message })
-    // the response status and err.message are returned in the repsonse body
+  // next middleware id configured to handle errors
+  const status = err.status || 500
+  // the status will be the status property of err if given or 500 by default
+  res.status(status).json({ message: err.message })
+  // the response status and err.message are returned in the repsonse body
 })
 
 module.exports = app
@@ -102,9 +103,9 @@ const PORT = process.env.PORT || 3000
 // the port number is defined as the environment variable, PORT, or 3000 if none is defined
 
 app.listen(PORT, () => {
-// app is started with two arguments:
-    // - the port number defined earlier
-    // - a callback function that console logs a message to confirm the app is running
+  // app is started with two arguments:
+  // - the port number defined earlier
+  // - a callback function that console logs a message to confirm the app is running
   console.log(`Server running on port ${PORT}`)
 })
 ```

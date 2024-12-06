@@ -5,50 +5,58 @@
 Add the `deleteTodo` function to the existing imports:
 
 ```javascript
-const { getAllTodos, getTodoById, createTodo, deleteTodo } = require('./todoController');
+const {
+  getAllTodos,
+  getTodoById,
+  createTodo,
+  deleteTodo,
+} = require('./todoController')
 ```
 
 Within the over-arching `describe('Todo routes controller functions unit tests')` block, add a `describe` block for the `deleteTodo` function:
 
 ```javascript
-describe('deleteTodo()', () => {
-    
-})
+describe('deleteTodo()', () => {})
 ```
 
 ## Add 'happy route' unit tests
 
 ```javascript
 test.each([
-    ['123456789012345678901234', 'Eat', true],
-    ['234567890123456789012345', 'Sleep', false],
-    ['345678901234567890123456', 'Pray', false]
-])('should delete todo with id %s from the database and return status 200 and an array contianing only the deleted todo object', async (id, task, completed) => {
+  ['123456789012345678901234', 'Eat', true],
+  ['234567890123456789012345', 'Sleep', false],
+  ['345678901234567890123456', 'Pray', false],
+])(
+  'should delete todo with id %s from the database and return status 200 and an array contianing only the deleted todo object',
+  async (id, task, completed) => {
     // Arrange
     const mReq = {
-        params: {
-            id
-        }
-    };
+      params: {
+        id,
+      },
+    }
     const mRes = {
-        status: jest.fn().mockReturnThis(),
-        json: jest.fn()
-    };
-    const mNext = jest.fn();
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+    }
+    const mNext = jest.fn()
 
     // Act
-    await deleteTodo(mReq, mRes, mNext);
+    await deleteTodo(mReq, mRes, mNext)
 
     // Assert
-    expect(mRes.status).toHaveBeenCalledWith(200);
-    expect(mRes.json).toHaveBeenCalledWith({"message": `Todo with ID ${id} was successfully deleted`})
+    expect(mRes.status).toHaveBeenCalledWith(200)
+    expect(mRes.json).toHaveBeenCalledWith({
+      message: `Todo with ID ${id} was successfully deleted`,
+    })
 
     // Act
     const todo = await Todo.findById(id)
 
     // Assert
     expect(todo).toBeNull()
-})
+  },
+)
 ```
 
 **NOTE:** In this case, since all we get back is a message saying that the `todo` has been deleted, there is an extra `findById` call to look in the database for that `todo`. This check should find no such `todo` and return `null`. This is optional.
@@ -56,27 +64,33 @@ test.each([
 ## Unit testing validation and error handling
 
 Test validation and error handling for:
+
 - the `_id` not being a valid MongoDB ID object
 - `task` with `_id` not found in the database
 
-
 ```javascript
 test.each([
-    ['999999999999999999999999', 404, 'No todo with ID 999999999999999999999999 was found in the database'],
-    ['cat', 400, `'cat' is not a valid todo ID`],
-    [true, 400, `'true' is not a valid todo ID`],
-])('should return an appropriate status and error message when passed params ID of "%s"', async (id, status, errorMessage) => {
+  [
+    '999999999999999999999999',
+    404,
+    'No todo with ID 999999999999999999999999 was found in the database',
+  ],
+  ['cat', 400, `'cat' is not a valid todo ID`],
+  [true, 400, `'true' is not a valid todo ID`],
+])(
+  'should return an appropriate status and error message when passed params ID of "%s"',
+  async (id, status, errorMessage) => {
     // Arrange
     const mReq = {
-        params: {
-            id
-        }
-    };
+      params: {
+        id,
+      },
+    }
     const mRes = {
-        status: jest.fn().mockReturnThis(),
-        json: jest.fn()
-    };
-    const mNext = jest.fn();
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+    }
+    const mNext = jest.fn()
 
     // Act
     await deleteTodo(mReq, mRes, mNext)
@@ -86,7 +100,8 @@ test.each([
     expect(mNext).toHaveBeenCalledWith({ status, message: errorMessage })
     expect(mNext.mock.calls[0][0].status).toBe(status)
     expect(mNext.mock.calls[0][0].message).toBe(errorMessage)
-})
+  },
+)
 ```
 
 [NEXT: DELETE /todos integration tests](5c_deleteTodo_integrationTests.md)
@@ -95,63 +110,75 @@ test.each([
 
 ```javascript
 describe('deleteTodo()', () => {
-    test.each([
-        ['123456789012345678901234', 'Eat', true],
-        ['234567890123456789012345', 'Sleep', false],
-        ['345678901234567890123456', 'Pray', false]
-    ])('should delete todo with id %s from the database and return status 200 and an array contianing only the deleted todo object', async (id, task, completed) => {
-        // Arrange
-        const mReq = {
-            params: {
-                id
-            }
-        };
-        const mRes = {
-            status: jest.fn().mockReturnThis(),
-            json: jest.fn()
-        };
-        const mNext = jest.fn();
+  test.each([
+    ['123456789012345678901234', 'Eat', true],
+    ['234567890123456789012345', 'Sleep', false],
+    ['345678901234567890123456', 'Pray', false],
+  ])(
+    'should delete todo with id %s from the database and return status 200 and an array contianing only the deleted todo object',
+    async (id, task, completed) => {
+      // Arrange
+      const mReq = {
+        params: {
+          id,
+        },
+      }
+      const mRes = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn(),
+      }
+      const mNext = jest.fn()
 
-        // Act
-        await deleteTodo(mReq, mRes, mNext);
+      // Act
+      await deleteTodo(mReq, mRes, mNext)
 
-        // Assert
-        expect(mRes.status).toHaveBeenCalledWith(200);
-        expect(mRes.json).toHaveBeenCalledWith({"message": `Todo with ID ${id} was successfully deleted`})
+      // Assert
+      expect(mRes.status).toHaveBeenCalledWith(200)
+      expect(mRes.json).toHaveBeenCalledWith({
+        message: `Todo with ID ${id} was successfully deleted`,
+      })
 
-        // Act
-        const todo = await Todo.findById(id)
+      // Act
+      const todo = await Todo.findById(id)
 
-        // Assert
-        expect(todo).toBeNull()
-    })
+      // Assert
+      expect(todo).toBeNull()
+    },
+  )
 
-    test.each([
-        ['999999999999999999999999', 404, 'No todo with ID 999999999999999999999999 was found in the database'],
-        ['cat', 400, `'cat' is not a valid todo ID`],
-        [true, 400, `'true' is not a valid todo ID`],
-    ])('should return an appropriate status and error message when passed params ID of "%s"', async (id, status, errorMessage) => {
-        // Arrange
-        const mReq = {
-            params: {
-                id
-            }
-        };
-        const mRes = {
-            status: jest.fn().mockReturnThis(),
-            json: jest.fn()
-        };
-        const mNext = jest.fn();
+  test.each([
+    [
+      '999999999999999999999999',
+      404,
+      'No todo with ID 999999999999999999999999 was found in the database',
+    ],
+    ['cat', 400, `'cat' is not a valid todo ID`],
+    [true, 400, `'true' is not a valid todo ID`],
+  ])(
+    'should return an appropriate status and error message when passed params ID of "%s"',
+    async (id, status, errorMessage) => {
+      // Arrange
+      const mReq = {
+        params: {
+          id,
+        },
+      }
+      const mRes = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn(),
+      }
+      const mNext = jest.fn()
 
-        // Act
-        await deleteTodo(mReq, mRes, mNext)
+      // Act
+      await deleteTodo(mReq, mRes, mNext)
 
-        // Assert
-        expect(mRes.status).not.toHaveBeenCalled()
-        expect(mNext).toHaveBeenCalledWith({ status, message: errorMessage })
-        expect(mNext.mock.calls[0][0].status).toBe(status)
-        expect(mNext.mock.calls[0][0].message).toBe(errorMessage)
-    })
+      // Assert
+      expect(mRes.status).not.toHaveBeenCalled()
+      expect(mNext).toHaveBeenCalledWith({ status, message: errorMessage })
+      expect(mNext.mock.calls[0][0].status).toBe(status)
+      expect(mNext.mock.calls[0][0].message).toBe(errorMessage)
+    },
+  )
 })
 ```
 

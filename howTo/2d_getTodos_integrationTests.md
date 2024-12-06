@@ -19,7 +19,6 @@ describe('App todo endpoints integration tests', () => {
   beforeEach(async () => {
     await seedTodos(false)
   })
-    
 })
 ```
 
@@ -28,24 +27,22 @@ describe('App todo endpoints integration tests', () => {
 Within the over-arching `describe('App todo endpoints integration tests')` block, add a `describe` block for the `GET /todos/:id` route:
 
 ```javascript
-describe('GET /todos', () => {
-    
-})
+describe('GET /todos', () => {})
 ```
 
 ## Add 'happy route' tests
 
 ```javascript
 test('should return an array of all todos and status 200', async () => {
-    // Act
-    const response = await request(app).get('/todos');
+  // Act
+  const response = await request(app).get('/todos')
 
-    // Assert
-    expect(response.status).toBe(200)
-    const allTodos = response.body
-    expect(allTodos.length).toBe(3)
-    expect(allTodos[0].task).toBe('Eat')
-    expect(allTodos[1].completed).toBe(false)
+  // Assert
+  expect(response.status).toBe(200)
+  const allTodos = response.body
+  expect(allTodos.length).toBe(3)
+  expect(allTodos[0].task).toBe('Eat')
+  expect(allTodos[1].completed).toBe(false)
 })
 ```
 

@@ -9,7 +9,7 @@ const connectToDatabase = require('./db')
       console.log(`Server listening on port ${port}`)
     })
   } catch (error) {
-    console.error("Failed to start the server:", error)
+    console.error('Failed to start the server:', error)
     process.exit(1)
   }
 })()
