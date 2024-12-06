@@ -62,8 +62,8 @@ test.each([
 We also test our validation by running function calls that should fail and asserting the message that we receive and the code that is returned.
 
 Test validation and error handling for:
-- `task` not found in the database
 - the `_id` not being a valid MongoDB ID object
+- `task` with `_id` not found in the database
 
 
 ```javascript
