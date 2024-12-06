@@ -110,7 +110,7 @@ describe('App todo endpoints integration tests', () => {
     })
   });
 
-  describe('UPDATE /todos/:id', () => {
+  describe('PATCH /todos/:id', () => {
     test.each([
       ['123456789012345678901234', 'Eat', false],
       ['234567890123456789012345', 'Dream', true],
@@ -182,7 +182,21 @@ describe('App todo endpoints integration tests', () => {
       expect(response.status).toBe(status)
       expect(response.body.message).toBe(errorMessage)
       expect(response.body).toEqual({ message: errorMessage })
-    });
+    })
+
+    test.each([
+      ['123456789012345678901234', ['Dream', false], 400, 'The request body must be a valid JS object'],
+      ['234567890123456789012345', [], 400, 'The request body must be a valid JS object'],
+      ['345678901234567890123456', [{ task: 'Dream', completed: true }], 400, 'The request body must be a valid JS object'],
+    ])('should return an appropriate status and error message when passed the ID param: "%s", and an invalid req.body: %s', async (id, body, status, errorMessage) => {
+      // Act
+      const response = await request(app).patch(`/todos/${id}`).send(body).set('Content-Type', 'application/json')
+
+      // Assert
+      expect(response.status).toBe(status)
+      expect(response.body.message).toBe(errorMessage)
+      expect(response.body).toEqual({ message: errorMessage })
+    })
 
     test.each([
       ['123456789012345678901234', '', 400, 'Task cannot be an empty string. If a task property is sent, it must be a valid string'],
@@ -196,7 +210,7 @@ describe('App todo endpoints integration tests', () => {
       expect(response.status).toBe(status)
       expect(response.body.message).toBe(errorMessage)
       expect(response.body).toEqual({ message: errorMessage })
-    });
+    })
 
     test.each([
       ['123456789012345678901234', 212, 400, 'Completed property must be a Boolean. Received type number'],
@@ -211,9 +225,8 @@ describe('App todo endpoints integration tests', () => {
       expect(response.status).toBe(status)
       expect(response.body.message).toBe(errorMessage)
       expect(response.body).toEqual({ message: errorMessage })
-    });
-
-  });
-});
+    })
+  })
+})
 
 

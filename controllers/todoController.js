@@ -78,11 +78,11 @@ exports.updateTodo = async (req, res, next) => {
         id,
         updates,
         { new: true, runValidators: true }
-    );
+    )
     if (!todo) {
-      return next({ status: 404, message: `No todo with ID ${id} was found in the database` });
+      return next({ status: 404, message: `No todo with ID ${id} was found in the database` })
     }
-    res.status(200).json(todo);
+    res.status(200).json(todo)
   } catch (error) {
     next(error)
   }

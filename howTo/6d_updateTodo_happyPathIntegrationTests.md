@@ -2,6 +2,12 @@
 
 [Jump to complete test code](#final-updatetodo-happy-path-integration-test-code)
 
+[tests for `task` and `completed` properties](#happy-route-integration-tests-for-both-task-and-completed)
+
+[tests for `task` property only](#happy-route-integration-tests-for-task-only)
+
+[tests for `completed` property only](#happy-route-integration-tests-for-completed-only)
+
 **NOTE:** As the testing for the `PATCH` endpoint is considerably longer than other endpoints, both the unit and integration sections have been split into `happy path` and `error handling` tests.
 
 Within the over-arching `describe('App todo endpoints integration tests')` block, add a `describe` block for the `PATCH /todos/:id` route:
@@ -12,7 +18,7 @@ describe('PATCH /todos/:id', () => {
 })
 ```
 
-## Add 'happy route' integration tests for when both `task` and `completed` are being updated
+## 'Happy route' integration tests for both `task` and `completed`
 
 ```javascript
 test.each([
@@ -35,7 +41,7 @@ test.each([
 })
 ```
 
-## Add 'happy route' unit tests for when only `task` is being updated
+## 'Happy route' integration tests for `task` only
 
 ```javascript
 test.each([
@@ -56,7 +62,7 @@ test.each([
 })
 ```
 
-## Add 'happy route' unit tests for when only `completed` is being updated
+## 'Happy route' integration tests for `completed` only
 
 ```javascript
 test.each([
@@ -79,7 +85,7 @@ test.each([
 
 [NEXT: PATCH /todos/:id error handling integration tests](6e_updateTodo_errorHandlingIntegrationTests.md)
 
-### Final updateTodo happy path unit test code
+### Final updateTodo happy path integration test code
 
 ```javascript
 describe('UPDATE /todos/:id', () => {
