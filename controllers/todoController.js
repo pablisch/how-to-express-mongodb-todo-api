@@ -64,7 +64,7 @@ exports.updateTodo = async (req, res, next) => {
   }
   const updates = req.body
   if (!updates || typeof updates !== 'object' || Array.isArray(updates)) {
-    return next({ status: 400, message: 'Updates must be an object' })
+    return next({ status: 400, message: 'The request body must be a valid JS object' })
   }
   const {task, completed} = req.body
   if (task === '') return next({ status: 400, message: 'Task cannot be an empty string. If a task property is sent, it must be a valid string' })

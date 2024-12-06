@@ -48,7 +48,7 @@ if (!todo) {
 For `req.body` being a valid JS object:
 ```javascript
 if (!updates || typeof updates !== 'object' || Array.isArray(updates)) {
-    return next({ status: 400, message: 'Updates must be an object' })
+    return next({ status: 400, message: 'The request body must be a valid JS object' })
 }
 ```
 **NOTE:** checks that `updates` is not an array since arrays are also an object type.
@@ -92,7 +92,7 @@ exports.updateTodo = async (req, res, next) => {
     }
     const updates = req.body
     if (!updates || typeof updates !== 'object' || Array.isArray(updates)) {
-        return next({ status: 400, message: 'Updates must be an object' })
+        return next({ status: 400, message: 'The request body must be a valid JS object' })
     }
     const {task, completed} = req.body
     if (task === '') return next({ status: 400, message: 'Task cannot be an empty string. If a task property is sent, it must be a valid string' })
@@ -133,5 +133,5 @@ router.delete('/', updateTodo)
 
 And as before, there is no need to add anything to `app.js`.
 
-[NEXT: Add updateTodo controller function unit tests](6b_updateTodo_unitTests.md)
+[NEXT: Add updateTodo controller function unit tests](6b_updateTodo_happyPathUnitTests)
 

@@ -353,6 +353,32 @@ describe('Todo routes controller functions unit tests', () => {
     })
 
     test.each([
+      ['123456789012345678901234', ['Dream', true], 400, 'The request body must be a valid JS object'],
+      ['234567890123456789012345', 'Dream', 400, 'The request body must be a valid JS object'],
+      ['345678901234567890123456', true, 400, 'The request body must be a valid JS object'],
+    ])('should return an appropriate status and error message for todo with id of "%s" where req.body is %s', async (id, body, status, errorMessage) => {
+      // Arrange
+      const mReq = {
+        params: {
+          id
+        },
+        body: body,
+      };
+      const mRes = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn()
+      };
+      const mNext = jest.fn();
+
+      // Act
+      await updateTodo(mReq, mRes, mNext);
+
+      // Assert
+      expect(mRes.status).not.toHaveBeenCalled()
+      expect(mNext.mock.calls[0][0]).toEqual({ status, message: errorMessage })
+    })
+
+    test.each([
       ['123456789012345678901234', '', 400, 'Task cannot be an empty string. If a task property is sent, it must be a valid string'],
       ['234567890123456789012345', true, 400, 'Task property must be a string. Received type boolean'],
       ['345678901234567890123456', 400, 400, 'Task property must be a string. Received type number'],
