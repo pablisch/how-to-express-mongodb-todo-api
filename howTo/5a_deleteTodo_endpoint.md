@@ -17,7 +17,7 @@ exports.deleteTodo = async (req, res, next) => {
 ## Add validation for deleteTodo
 
 The `_id` property passed in as a param to delete a todo. We will need to validate and handle errors for:
-- the `_id` passed in as a param is a valid MongoDB ID.
+- the `_id` passed in as a param is a valid MongoDB ID
 - there is a todo with that `_id` in the database
 
 For `_id` being a valid MongoDB ID:

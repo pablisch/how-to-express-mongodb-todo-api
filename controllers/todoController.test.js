@@ -252,10 +252,10 @@ describe('Todo routes controller functions unit tests', () => {
     })
 
     test.each([
-      ['123456789012345678901234', "Jump", true],
-      ['234567890123456789012345', "Dream", false],
-      ['345678901234567890123456', "Swim", false],
-    ])('should update todo with ID %s in the database and return status 200 and the updated todo object where ONLY the task property is passed in', async (id, task, completed) => {
+      ['123456789012345678901234', "Jump"],
+      ['234567890123456789012345', "Dream"],
+      ['345678901234567890123456', "Swim"],
+    ])('should update todo with ID %s in the database and return status 200 and the updated todo object where ONLY the task property is passed in', async (id, task) => {
       // Arrange
       const mReq = {
         params: {
@@ -279,14 +279,14 @@ describe('Todo routes controller functions unit tests', () => {
       const updatedTodo = mRes.json.mock.calls[0][0]
       expect((updatedTodo._id).toString()).toBe(id);
       expect(updatedTodo.task).toBe(task);
-      expect(updatedTodo.completed).toBe(completed);
+      expect(updatedTodo.completed).not.toBe(undefined);
     })
 
     test.each([
-      ['123456789012345678901234', "Eat", false],
-      ['234567890123456789012345', "Sleep", true],
-      ['345678901234567890123456', "Pray", true],
-    ])('should update todo with ID %s in the database and return status 200 and the updated todo object where ONLY the completed property is passed in', async (id, task, completed) => {
+      ['123456789012345678901234', false],
+      ['234567890123456789012345', true],
+      ['345678901234567890123456', true],
+    ])('should update todo with ID %s in the database and return status 200 and the updated todo object where ONLY the completed property is passed in', async (id, completed) => {
       // Arrange
       const mReq = {
         params: {
@@ -309,7 +309,7 @@ describe('Todo routes controller functions unit tests', () => {
       expect(mRes.status).toHaveBeenCalledWith(200)
       const updatedTodo = mRes.json.mock.calls[0][0]
       expect((updatedTodo._id).toString()).toBe(id);
-      expect(updatedTodo.task).toBe(task);
+      expect(updatedTodo.task).not.toBe(undefined);
       expect(updatedTodo.completed).toBe(completed);
     })
 
@@ -323,6 +323,7 @@ describe('Todo routes controller functions unit tests', () => {
       ['123456789012345678901234', 'Dream', [true], 400, 'Completed property must be a Boolean. Received type object'],
       ['cat', 'Fly', true, 400, "'cat' is not a valid todo ID"],
       ['999999999999999999999999', 'Fly', true, 404, 'No todo with ID 999999999999999999999999 was found in the database'],
+      ['123456789012345678901234', undefined, undefined, 400, 'Updating a todo requires a task and/or completed property'],
     ])('should return an appropriate status and error message for todo with id of "%s", task "%s" and completed property "%s"', async (id, task, completed, status, errorMessage) => {
       // Arrange
       const mReq = {

@@ -66,9 +66,13 @@ exports.updateTodo = async (req, res, next) => {
   if (!updates || typeof updates !== 'object' || Array.isArray(updates)) {
     return next({ status: 400, message: 'Updates must be an object' })
   }
-  if (updates?.task === '') return next({ status: 400, message: 'Task cannot be an empty string. If a task property is sent, it must be a valid string' })
-  if (updates?.task && typeof(updates?.task) !== "string") return next({ status: 400, message: `Task property must be a string. Received type ${typeof(updates?.task)}` })
-  if (updates?.completed && typeof(updates?.completed) !== "boolean") return next({ status: 400, message: `Completed property must be a Boolean. Received type ${typeof(updates?.completed)}` })
+  const {task, completed} = req.body
+  if (task === '') return next({ status: 400, message: 'Task cannot be an empty string. If a task property is sent, it must be a valid string' })
+  if (!task && !completed && completed !== false) {
+    return next({ status: 400, message: 'Updating a todo requires a task and/or completed property' })
+  }
+  if (task && typeof(task) !== "string") return next({ status: 400, message: `Task property must be a string. Received type ${typeof(task)}` })
+  if (completed && typeof(completed) !== "boolean") return next({ status: 400, message: `Completed property must be a Boolean. Received type ${typeof(completed)}` })
   try {
     const todo = await Todo.findByIdAndUpdate(
         id,
