@@ -133,5 +133,5 @@ router.delete('/', updateTodo)
 
 And as before, there is no need to add anything to `app.js`.
 
-[NEXT: Add updateTodo controller function unit tests](6b_updateTodo_happyPathUnitTests.md)
+[NEXT: Add updateTodo controller happy path unit tests](6b_updateTodo_happyPathUnitTests.md)
 

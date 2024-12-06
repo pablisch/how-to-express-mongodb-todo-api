@@ -125,7 +125,7 @@ test.each([
 })
 ```
 
-[NEXT: PATCH /todos integration tests](6c_updateTodo_errorHandlingUnitTests.md)
+[NEXT: Add updateTodo controller error handling unit tests](6c_updateTodo_errorHandlingUnitTests.md)
 
 ### Final updateTodo happy path unit test code
 
