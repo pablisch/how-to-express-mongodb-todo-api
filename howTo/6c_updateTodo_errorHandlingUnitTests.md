@@ -1,8 +1,8 @@
 # Write updateTodo controller function 'happy path' unit tests
 
-[Jump to completed error handling test code for `updateTodo`](#final-updatetodo-error-handling-unit-test-code)
+[Jump to completed error handling unit test code for `updateTodo`](#final-updatetodo-error-handling-unit-test-code)
 
-[Jump to completed test code for ALL `updateTodo`](#final-updatetodo-complete-unit-test-code)
+[Jump to completed unit test code for ALL `updateTodo`](#final-updatetodo-complete-unit-test-code)
 
 [tests for `task` and `completed` properties](#validation-and-error-handling-tests-for-both-task-and-completed)
 

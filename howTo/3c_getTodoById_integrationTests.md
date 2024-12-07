@@ -1,5 +1,7 @@
 # GET /todos/:id endpoint integration tests
 
+[Jump to final code for this section](#final-get-todosid-integration-test-code)
+
 Within the over-arching `describe('App todo endpoints integration tests')` block, add a `describe` block for the `GET /todos/:id` route:
 
 ```javascript

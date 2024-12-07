@@ -212,7 +212,7 @@ test.each([
 )
 ```
 
-[NEXT: ???](6e_updateTodo_errorHandlingIntegrationTests.md)
+[NEXT: Notes on testing in this repository](7a_misc_notesOnTestingInRepo.md)
 
 ### Final `PATCH /todos/:id` error handling integration test code
 
@@ -398,7 +398,7 @@ test.each([
 )
 ```
 
-[NEXT: ???](6e_updateTodo_errorHandlingIntegrationTests.md)
+[NEXT: Notes on testing in this repository](7a_misc_notesOnTestingInRepo.md)
 
 ### Final `PATCH /todos/:id` COMPLETE integration test code
 
@@ -652,4 +652,4 @@ describe('PATCH /todos/:id', () => {
 })
 ```
 
-[NEXT: ???](6e_updateTodo_errorHandlingIntegrationTests.md)
+[NEXT: Notes on testing in this repository](7a_misc_notesOnTestingInRepo.md)

@@ -1,6 +1,6 @@
 # Write updateTodo controller function 'happy path' unit tests
 
-[Jump to complete test code](#final-updatetodo-happy-path-unit-test-code)
+[Jump to complete updateTodo happy path test code](#final-updatetodo-happy-path-unit-test-code)
 
 [tests for `task` and `completed` properties](#happy-route-unit-tests-for-both-task-and-completed)
 
