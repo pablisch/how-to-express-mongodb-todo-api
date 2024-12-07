@@ -47,7 +47,7 @@ test.each([
 )
 ```
 
-[link]()
+[NEXT: Add the DELETE /todos/:id endpoint](5a_deleteTodo_endpoint.md)
 
 ### Final POST /todos integration test code
 
@@ -85,3 +85,5 @@ describe('POST /todos', () => {
   )
 })
 ```
+
+[NEXT: Add the DELETE /todos/:id endpoint](5a_deleteTodo_endpoint.md)
