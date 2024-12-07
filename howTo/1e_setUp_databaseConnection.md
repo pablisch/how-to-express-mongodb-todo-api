@@ -1,8 +1,8 @@
-# Connecting to the database
+# Connecting to the database function
 
-Many apps have the database connection in `app.js` but since we will need to connect to the database to seed out database and re-seed for tests, it makes sense to have a separate function to handle this. It also makes a tidier `app.js` and separates concerns nicely.
+Many apps have the database connection in `app.js` but since we will need to connect to the database to seed out database and re-seed for tests, it makes sense to have a separate function to handle this. It also makes a tidier `app.js` and separates concerns nicely. In this app, we will actually call the database connection in `server.js` as we will see in the next chapter.
 
-Import `dotenv` and `mongoose`:
+In the currently empty `db.js` file, import `dotenv` and `mongoose`:
 
 ```javascript
 require('dotenv').config()

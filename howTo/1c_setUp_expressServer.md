@@ -54,7 +54,9 @@ npm start
 
 [NEXT: Creating a todos schema and seed data file](1d_setUp_todoSchemaAndSeeds.md)
 
-## Server code explained
+OR see below for explanation of the server code using code comments:
+
+## Server code commented
 
 ### app.js
 
