@@ -1,5 +1,7 @@
 # Adding the GET /todos endpoint in app.js and then refactoring
 
+[Jump to final code for this section](#final-code-at-the-end-of-this-section)
+
 ## Adding the GET /todos endpoint in app.js
 
 In the app.js file, create the todo route. For example:

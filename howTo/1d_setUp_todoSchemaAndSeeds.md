@@ -1,5 +1,7 @@
 # Setting the todo schema and writing seed data
 
+[Jump to final code for this section](#final-code-for-this-section)
+
 Since our server is all about connecting to a database and managing `todos` we will need a `todo` schema and seed data.
 
 ## Creating the todo schema

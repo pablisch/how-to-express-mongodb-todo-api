@@ -1,5 +1,7 @@
 # Connect the server to the database
 
+[Jump to final code for this section](#final-serverjs-code)
+
 We now have a basic Express server, a MongoDB database and a database connection function. Now we bring them together:
 
 ```javascript
@@ -125,7 +127,7 @@ OR
 
 **NOTE:** Both steps will end up with the same result. If you choose the first option (app.js) then this will be refactored into a controller function and route.
 
-## Final code in server.js
+## Final server.js code
 
 ```javascript
 const app = require('./app')

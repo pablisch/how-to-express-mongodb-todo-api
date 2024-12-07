@@ -1,5 +1,7 @@
 # Creating database seeding functions and scripts
 
+[Jump to final code for this section](#final-code-for-this-section)
+
 In the file, `seedTodos.js`, import the `Todo` schema, `todoSeedData` and the database connection function:
 
 ```javascript

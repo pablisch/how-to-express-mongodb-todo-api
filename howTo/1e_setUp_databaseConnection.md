@@ -1,5 +1,7 @@
 # Connecting to the database function
 
+[Jump to final code for this section](#final-dbjs-code)
+
 Many apps have the database connection in `app.js` but since we will need to connect to the database to seed out database and re-seed for tests, it makes sense to have a separate function to handle this. It also makes a tidier `app.js` and separates concerns nicely. In this app, we will actually call the database connection in `server.js` as we will see in the next chapter.
 
 In the currently empty `db.js` file, import `dotenv` and `mongoose`:
@@ -52,7 +54,7 @@ module.exports = connectToDatabase
 
 [NEXT: Creating seeding functions and scripts](1f_setUp_seedingFunctions.md)
 
-## The final db.js code
+## Final db.js code
 
 ```javascript
 require('dotenv').config()
