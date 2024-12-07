@@ -68,8 +68,8 @@ The purpose of this project as a guide, not to run the API, but should you wish 
 1. [PATCH /todos/:id_endpoint](howTo/6a_updateTodo_endpoint.md)
 2. [updateTodo_controller happy path unit tests](howTo/6b_updateTodo_happyPathUnitTests.md)
 3. [updateTodo_controller error handling unit tests](howTo/6c_updateTodo_errorHandlingUnitTests.md)
-4. [PATCH /todos/:id_endpoint happy path_integration tests](howTo/6c_updateTodo_happyPathIntegrationTests.md)
-5. [PATCH /todos/:id_endpoint error handling_integration tests](howTo/6c_updateTodo_errorHandlingIntegrationTests.md)
+4. [PATCH /todos/:id_endpoint happy path_integration tests](howTo/6d_updateTodo_happyPathIntegrationTests.md)
+5. [PATCH /todos/:id_endpoint error handling_integration tests](howTo/6e_updateTodo_errorHandlingIntegrationTests.md)
 
 ---
 
