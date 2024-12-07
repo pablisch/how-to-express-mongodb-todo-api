@@ -96,7 +96,7 @@ test.each([
     'Updating a todo requires a task and/or completed property',
   ],
 ])(
-  'should return an appropriate status and error message for todo with id of "%s", task "%s" and completed property "%s"',
+  'should return an appropriate status and error message for todo with id: "%s", task: "%s" and completed: %s',
   async (id, task, completed, status, errorMessage) => {
     // Arrange
     const mReq = {
@@ -154,7 +154,7 @@ test.each([
     'The request body must be a valid JS object',
   ],
 ])(
-  'should return an appropriate status and error message for todo with id of "%s" where req.body is %s',
+  'should return an appropriate status and error message for todo with id: "%s" when passed req.body: %s',
   async (id, body, status, errorMessage) => {
     // Arrange
     const mReq = {
@@ -213,7 +213,7 @@ test.each([
     'Task property must be a string. Received type object',
   ],
 ])(
-  'should return an appropriate status and error message for todo with id of "%s" when only task "%s" is passed in',
+  'should return an appropriate status and error message for todo with id: "%s" when passed ONLY task: "%s"',
   async (id, task, status, errorMessage) => {
     // Arrange
     const mReq = {
@@ -268,7 +268,7 @@ test.each([
     'Completed property must be a Boolean. Received type object',
   ],
 ])(
-  'should return an appropriate status and error message for todo with id of "%s" when only completed property "%s" is passed in',
+  'should return an appropriate status and error message for todo with id: "%s" when passed ONLY completed: %s',
   async (id, completed, status, errorMessage) => {
     // Arrange
     const mReq = {
@@ -367,7 +367,7 @@ test.each([
     'Updating a todo requires a task and/or completed property',
   ],
 ])(
-  'should return an appropriate status and error message for todo with id of "%s", task "%s" and completed property "%s"',
+  'should return an appropriate status and error message for todo with id: "%s", task: "%s" and completed: %s',
   async (id, task, completed, status, errorMessage) => {
     // Arrange
     const mReq = {
@@ -417,7 +417,7 @@ test.each([
     'The request body must be a valid JS object',
   ],
 ])(
-  'should return an appropriate status and error message for todo with id of "%s" where req.body is %s',
+  'should return an appropriate status and error message for todo with id: "%s" when passed req.body: %s',
   async (id, body, status, errorMessage) => {
     // Arrange
     const mReq = {
@@ -467,7 +467,7 @@ test.each([
     'Task property must be a string. Received type object',
   ],
 ])(
-  'should return an appropriate status and error message for todo with id of "%s" when only task "%s" is passed in',
+  'should return an appropriate status and error message for todo with id: "%s" when passed ONLY task: "%s"',
   async (id, task, status, errorMessage) => {
     // Arrange
     const mReq = {
@@ -514,7 +514,7 @@ test.each([
     'Completed property must be a Boolean. Received type object',
   ],
 ])(
-  'should return an appropriate status and error message for todo with id of "%s" when only completed property "%s" is passed in',
+  'should return an appropriate status and error message for todo with id: "%s" when passed ONLY completed: %s',
   async (id, completed, status, errorMessage) => {
     // Arrange
     const mReq = {
@@ -553,7 +553,7 @@ describe('updateTodo()', () => {
     ['234567890123456789012345', 'Dream', true],
     ['345678901234567890123456', 'Swim', true],
   ])(
-    'should update todo with ID %s in the database and return status 200 and the updated todo object where ALL properties are passed in',
+    'should update todo with ID: "%s" in the database and return status 200 and the updated todo object when passed ALL properties, task: "%s" and completed: %s',
     async (id, task, completed) => {
       // Arrange
       const mReq = {
@@ -588,7 +588,7 @@ describe('updateTodo()', () => {
     ['234567890123456789012345', 'Dream'],
     ['345678901234567890123456', 'Swim'],
   ])(
-    'should update todo with ID %s in the database and return status 200 and the updated todo object where ONLY the task property is passed in',
+    'should update todo with ID: "%s" in the database and return status 200 and the updated todo object when passed ONLY task: "%s"',
     async (id, task) => {
       // Arrange
       const mReq = {
@@ -622,7 +622,7 @@ describe('updateTodo()', () => {
     ['234567890123456789012345', true],
     ['345678901234567890123456', true],
   ])(
-    'should update todo with ID %s in the database and return status 200 and the updated todo object where ONLY the completed property is passed in',
+    'should update todo with ID: "%s" in the database and return status 200 and the updated todo object when passed ONLY completed: %s',
     async (id, completed) => {
       // Arrange
       const mReq = {
@@ -717,7 +717,7 @@ describe('updateTodo()', () => {
       'Updating a todo requires a task and/or completed property',
     ],
   ])(
-    'should return an appropriate status and error message for todo with id of "%s", task "%s" and completed property "%s"',
+    'should return an appropriate status and error message for todo with id: "%s", task: "%s" and completed: %s',
     async (id, task, completed, status, errorMessage) => {
       // Arrange
       const mReq = {
@@ -767,7 +767,7 @@ describe('updateTodo()', () => {
       'The request body must be a valid JS object',
     ],
   ])(
-    'should return an appropriate status and error message for todo with id of "%s" where req.body is %s',
+    'should return an appropriate status and error message for todo with id: "%s" when passed req.body: %s',
     async (id, body, status, errorMessage) => {
       // Arrange
       const mReq = {
@@ -817,7 +817,7 @@ describe('updateTodo()', () => {
       'Task property must be a string. Received type object',
     ],
   ])(
-    'should return an appropriate status and error message for todo with id of "%s" when only task "%s" is passed in',
+    'should return an appropriate status and error message for todo with id: "%s" when passed ONLY task: "%s"',
     async (id, task, status, errorMessage) => {
       // Arrange
       const mReq = {
@@ -864,7 +864,7 @@ describe('updateTodo()', () => {
       'Completed property must be a Boolean. Received type object',
     ],
   ])(
-    'should return an appropriate status and error message for todo with id of "%s" when only completed property "%s" is passed in',
+    'should return an appropriate status and error message for todo with id: "%s" when passed ONLY completed: %s',
     async (id, completed, status, errorMessage) => {
       // Arrange
       const mReq = {

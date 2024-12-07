@@ -18,7 +18,7 @@ describe('createTodo()', () => {})
 
 ```javascript
 test.each(['Climb', 'Swim', 'Climb a tree'])(
-  'should add a todo to the database and return an array with the added todo and status 201',
+  'should add a todo to the database and return the new todo and status 201 when passed task: "%s"',
   async (task) => {
     // Arrange
     const mReq = {
@@ -62,7 +62,7 @@ test.each([
   [212, 'Task must be a string but type number was given'],
   [true, 'Task must be a string but type boolean was given'],
 ])(
-  'should return status 400 and an appropriate error message when passed task, "%s" in the request body',
+  'should return status 400 and an appropriate error message when passed task: "%s"',
   async (task, errorMessage) => {
     // Arrange
     const mReq = {
@@ -96,7 +96,7 @@ test.each([
 ```javascript
 describe('createTodo()', () => {
   test.each(['Climb', 'Swim', 'Climb a tree'])(
-    'should add a todo to the database and return an array with the added todo and status 201',
+    'should add a todo to the database and return the new todo and status 201 when passed task: "%s"',
     async (task) => {
       // Arrange
       const mReq = {
@@ -127,7 +127,7 @@ describe('createTodo()', () => {
     [212, 'Task must be a string but type number was given'],
     [true, 'Task must be a string but type boolean was given'],
   ])(
-    'should return status 400 and an appropriate error message when passed task, "%s" in the request body',
+    'should return status 400 and an appropriate error message when passed task: "%s"',
     async (task, errorMessage) => {
       // Arrange
       const mReq = {

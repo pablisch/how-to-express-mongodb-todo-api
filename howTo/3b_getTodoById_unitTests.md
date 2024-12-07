@@ -78,7 +78,7 @@ test.each([
   ['dog', 400, `'dog' is not a valid todo ID`],
   [true, 400, `'true' is not a valid todo ID`],
 ])(
-  'should return an appropriate status and error message when called with id:"%s"',
+  'should return an appropriate status and error message when called with id: "%s"',
   async (id, status, errorMessage) => {
     // Arrange
     const mReq = {
@@ -154,7 +154,7 @@ describe('getTodoById()', () => {
     ['dog', 400, `'dog' is not a valid todo ID`],
     [true, 400, `'true' is not a valid todo ID`],
   ])(
-    'should return an appropriate status and error message when called with id:"%s"',
+    'should return an appropriate status and error message when called with id: "%s"',
     async (id, status, errorMessage) => {
       // Arrange
       const mReq = {

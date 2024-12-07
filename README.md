@@ -262,7 +262,7 @@ test.each([
   [true, 400, 'Invalid id provided. ID must be a number.'],
   [2000, 404, 'No todo with an ID of 2000 could be found in the database.'],
 ])(
-  'should return an appropriate status and error message when passed params ID of "%s"',
+  'should return status 400 and an appropriate error message when passed task: "%s"',
   async (id, status, errorMessage) => {
     // Arrange
     const mReq = {
@@ -558,7 +558,7 @@ test.each([
     'No todo with an ID of 0 could be found in the database.',
   ],
 ])(
-  'should return an appropriate status and error message for todo with id of "%s", task "%s" and completed property "%s"',
+  'should return an appropriate status and error message for todo with id: "%s", task: "%s" and completed: %s',
   async (id, task, completed, status, errorMessage) => {
     // Arrange
     const mReq = {
@@ -938,7 +938,7 @@ test.each([
     'No todo with an ID of 0 could be found in the database.',
   ],
 ])(
-  'should return an appropriate status and error message for todo with id of "%s", task "%s" and completed property "%s"',
+  'should return an appropriate status and error message for todo with id: "%s", task: "%s" and completed: %s',
   async (id, task, completed, status, errorMessage) => {
     // Arrange
     const mReq = {

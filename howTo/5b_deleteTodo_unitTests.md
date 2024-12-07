@@ -27,7 +27,7 @@ test.each([
   ['234567890123456789012345', 'Sleep', false],
   ['345678901234567890123456', 'Pray', false],
 ])(
-  'should delete todo with id %s from the database and return status 200 and an array contianing only the deleted todo object',
+  'should delete todo with id: "%s" from the database and return status 200 with a success confirmation message',
   async (id, task, completed) => {
     // Arrange
     const mReq = {
@@ -78,7 +78,7 @@ test.each([
   ['cat', 400, `'cat' is not a valid todo ID`],
   [true, 400, `'true' is not a valid todo ID`],
 ])(
-  'should return an appropriate status and error message when passed params ID of "%s"',
+  'should return status 400 and an appropriate error message when passed task: "%s"',
   async (id, status, errorMessage) => {
     // Arrange
     const mReq = {
@@ -115,7 +115,7 @@ describe('deleteTodo()', () => {
     ['234567890123456789012345', 'Sleep', false],
     ['345678901234567890123456', 'Pray', false],
   ])(
-    'should delete todo with id %s from the database and return status 200 and an array contianing only the deleted todo object',
+    'should delete todo with id: "%s" from the database and return status 200 with a success confirmation message',
     async (id, task, completed) => {
       // Arrange
       const mReq = {
@@ -155,7 +155,7 @@ describe('deleteTodo()', () => {
     ['cat', 400, `'cat' is not a valid todo ID`],
     [true, 400, `'true' is not a valid todo ID`],
   ])(
-    'should return an appropriate status and error message when passed params ID of "%s"',
+    'should return status 400 and an appropriate error message when passed task: "%s"',
     async (id, status, errorMessage) => {
       // Arrange
       const mReq = {

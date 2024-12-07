@@ -94,7 +94,7 @@ describe('Todo routes controller functions unit tests', () => {
       ['dog', 400, `'dog' is not a valid todo ID`],
       [true, 400, `'true' is not a valid todo ID`],
     ])(
-      'should return an appropriate status and error message when called with id:"%s"',
+      'should return an appropriate status and error message when called with id: "%s"',
       async (id, status, errorMessage) => {
         // Arrange
         const mReq = {
@@ -123,7 +123,7 @@ describe('Todo routes controller functions unit tests', () => {
 
   describe('createTodo()', () => {
     test.each(['Climb', 'Swim', 'Climb a tree'])(
-      'should add a todo to the database and return an array with the added todo and status 201',
+      'should add a todo to the database and return the new todo and status 201 when passed task: "%s"',
       async (task) => {
         // Arrange
         const mReq = {
@@ -154,7 +154,7 @@ describe('Todo routes controller functions unit tests', () => {
       [212, 'Task must be a string but type number was given'],
       [true, 'Task must be a string but type boolean was given'],
     ])(
-      'should return status 400 and an appropriate error message when passed task, "%s" in the request body',
+      'should return status 400 and an appropriate error message when passed task: "%s"',
       async (task, errorMessage) => {
         // Arrange
         const mReq = {
@@ -190,7 +190,7 @@ describe('Todo routes controller functions unit tests', () => {
       ['234567890123456789012345', 'Sleep', false],
       ['345678901234567890123456', 'Pray', false],
     ])(
-      'should delete todo with id %s from the database and return status 200 and an array contianing only the deleted todo object',
+      'should delete todo with id: "%s" from the database and return status 200 with a success confirmation message',
       async (id, task, completed) => {
         // Arrange
         const mReq = {
@@ -230,7 +230,7 @@ describe('Todo routes controller functions unit tests', () => {
       ['cat', 400, `'cat' is not a valid todo ID`],
       [true, 400, `'true' is not a valid todo ID`],
     ])(
-      'should return an appropriate status and error message when passed params ID of "%s"',
+      'should return status 400 and an appropriate error message when passed task: "%s"',
       async (id, status, errorMessage) => {
         // Arrange
         const mReq = {
@@ -262,7 +262,7 @@ describe('Todo routes controller functions unit tests', () => {
       ['234567890123456789012345', 'Dream', true],
       ['345678901234567890123456', 'Swim', true],
     ])(
-      'should update todo with ID %s in the database and return status 200 and the updated todo object where ALL properties are passed in',
+      'should update todo with ID: "%s" in the database and return status 200 and the updated todo object when passed ALL properties, task: "%s" and completed: %s',
       async (id, task, completed) => {
         // Arrange
         const mReq = {
@@ -297,7 +297,7 @@ describe('Todo routes controller functions unit tests', () => {
       ['234567890123456789012345', 'Dream'],
       ['345678901234567890123456', 'Swim'],
     ])(
-      'should update todo with ID %s in the database and return status 200 and the updated todo object where ONLY the task property is passed in',
+      'should update todo with ID: "%s" in the database and return status 200 and the updated todo object when passed ONLY task: "%s"',
       async (id, task) => {
         // Arrange
         const mReq = {
@@ -331,7 +331,7 @@ describe('Todo routes controller functions unit tests', () => {
       ['234567890123456789012345', true],
       ['345678901234567890123456', true],
     ])(
-      'should update todo with ID %s in the database and return status 200 and the updated todo object where ONLY the completed property is passed in',
+      'should update todo with ID: "%s" in the database and return status 200 and the updated todo object when passed ONLY completed: %s',
       async (id, completed) => {
         // Arrange
         const mReq = {
@@ -426,7 +426,7 @@ describe('Todo routes controller functions unit tests', () => {
         'Updating a todo requires a task and/or completed property',
       ],
     ])(
-      'should return an appropriate status and error message for todo with id of "%s", task "%s" and completed property "%s"',
+      'should return an appropriate status and error message for todo with id: "%s", task: "%s" and completed: %s',
       async (id, task, completed, status, errorMessage) => {
         // Arrange
         const mReq = {
@@ -479,7 +479,7 @@ describe('Todo routes controller functions unit tests', () => {
         'The request body must be a valid JS object',
       ],
     ])(
-      'should return an appropriate status and error message for todo with id of "%s" where req.body is %s',
+      'should return an appropriate status and error message for todo with id: "%s" when passed req.body: %s',
       async (id, body, status, errorMessage) => {
         // Arrange
         const mReq = {
@@ -532,7 +532,7 @@ describe('Todo routes controller functions unit tests', () => {
         'Task property must be a string. Received type object',
       ],
     ])(
-      'should return an appropriate status and error message for todo with id of "%s" when only task "%s" is passed in',
+      'should return an appropriate status and error message for todo with id: "%s" when passed ONLY task: "%s"',
       async (id, task, status, errorMessage) => {
         // Arrange
         const mReq = {
@@ -582,7 +582,7 @@ describe('Todo routes controller functions unit tests', () => {
         'Completed property must be a Boolean. Received type object',
       ],
     ])(
-      'should return an appropriate status and error message for todo with id of "%s" when only completed property "%s" is passed in',
+      'should return an appropriate status and error message for todo with id: "%s" when passed ONLY completed: %s',
       async (id, completed, status, errorMessage) => {
         // Arrange
         const mReq = {

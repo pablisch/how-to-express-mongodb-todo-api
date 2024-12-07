@@ -36,7 +36,7 @@ test.each([
   ['234567890123456789012345', 'Dream', true],
   ['345678901234567890123456', 'Swim', true],
 ])(
-  'should update todo with ID %s in the database and return status 200 and the updated todo object where ALL properties are passed in',
+  'should update todo with ID: "%s" in the database and return status 200 and the updated todo object when passed ALL properties, task: "%s" and completed: %s',
   async (id, task, completed) => {
     // Arrange
     const mReq = {
@@ -75,7 +75,7 @@ test.each([
   ['234567890123456789012345', 'Dream'],
   ['345678901234567890123456', 'Swim'],
 ])(
-  'should update todo with ID %s in the database and return status 200 and the updated todo object where ONLY the task property is passed in',
+  'should update todo with ID: "%s" in the database and return status 200 and the updated todo object when passed ONLY task: "%s"',
   async (id, task) => {
     // Arrange
     const mReq = {
@@ -115,7 +115,7 @@ test.each([
   ['234567890123456789012345', true],
   ['345678901234567890123456', true],
 ])(
-  'should update todo with ID %s in the database and return status 200 and the updated todo object where ONLY the completed property is passed in',
+  'should update todo with ID: "%s" in the database and return status 200 and the updated todo object when passed ONLY completed: %s',
   async (id, completed) => {
     // Arrange
     const mReq = {
@@ -156,7 +156,7 @@ describe('updateTodo()', () => {
     ['234567890123456789012345', 'Dream', true],
     ['345678901234567890123456', 'Swim', true],
   ])(
-    'should update todo with ID %s in the database and return status 200 and the updated todo object where ALL properties are passed in',
+    'should update todo with ID: "%s" in the database and return status 200 and the updated todo object when passed ALL properties, task: "%s" and completed: %s',
     async (id, task, completed) => {
       // Arrange
       const mReq = {
@@ -191,7 +191,7 @@ describe('updateTodo()', () => {
     ['234567890123456789012345', 'Dream'],
     ['345678901234567890123456', 'Swim'],
   ])(
-    'should update todo with ID %s in the database and return status 200 and the updated todo object where ONLY the task property is passed in',
+    'should update todo with ID: "%s" in the database and return status 200 and the updated todo object when passed ONLY task: "%s"',
     async (id, task) => {
       // Arrange
       const mReq = {
@@ -225,7 +225,7 @@ describe('updateTodo()', () => {
     ['234567890123456789012345', true],
     ['345678901234567890123456', true],
   ])(
-    'should update todo with ID %s in the database and return status 200 and the updated todo object where ONLY the completed property is passed in',
+    'should update todo with ID: "%s" in the database and return status 200 and the updated todo object when passed ONLY completed: %s',
     async (id, completed) => {
       // Arrange
       const mReq = {
