@@ -8,6 +8,8 @@ const todoSeedData = require('./todosSeedData')
 const connectToDatabase = require('../db')
 ```
 
+## Functions to delete and insert todos
+
 Next, write functions to clear the database and write the seed data:
 
 ```javascript
@@ -20,9 +22,9 @@ const insertTodos = async () => {
 }
 ```
 
-**NOTE:** These functions really are not necessary but they do make the code very clear.
+**NOTE:** These separate functions aren't really necessary as they simply get called inside `seedTodos` and the code is not re-used but they do make the code clearer and separate concerns.
 
-Write the seeding function:
+## The overall seeding function
 
 ```javascript
 const seedTodos = async (logSuccess = true) => {
@@ -39,7 +41,7 @@ const seedTodos = async (logSuccess = true) => {
 }
 ```
 
-And finally, excport the function:
+And finally, export the function:
 
 ```javascript
 module.exports = seedTodos

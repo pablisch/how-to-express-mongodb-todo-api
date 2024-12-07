@@ -111,7 +111,7 @@ Here, there is a single function with error handling but it still calls the `asy
 **NOTES:**
 
 - This is an IIFE (immediately invoked function expression)
-- The preceeding `;` stops the function from being joined to the preceeding import call and causing an error. Where lines end in a `;` anyway, this is not an issue. As I often use a prettier setting to remove end of line punctuation, this becomes essential.
+- The preceding `;` stops the function from being joined to the preceding import call and causing an error. Where lines end in a `;` anyway, this is not an issue. As I often use a prettier setting to remove end of line punctuation, this becomes essential.
 
 And we are back to the final code shown at the beginning of this chapter with no `async/await` issue, joined and with error handling.
 

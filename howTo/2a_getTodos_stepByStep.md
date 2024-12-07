@@ -15,6 +15,8 @@ app.get('/todos', async (req, res, next) => {
 })
 ```
 
+**NOTE:** This is a correct and valid route handler and we could carry on adding route handlers in `app.js` in this way. If we did so, however, `app.js` would soon become a messy, bloated file and so, we generally move the logic into separate controller functions grouped into routes as we will see in a bit.
+
 ## Manually test the todo route
 
 In browser or Postman, make a `GET` request to `http://localhost:3000/todos`.
