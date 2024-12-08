@@ -2,6 +2,8 @@
 
 [Return to the README file](../README.md)
 
+**IMPORTANT:** I would usually advise running test with `--watchAll`, however, in the case of development with a remote database, this means making endless calls to the database. In the case of a free instance of MongoDB Atlass, this means very quickly using up all of your free allowance, so I strongly advise NOT using `--watchAll` in such cases.
+
 ## Integration Tests
 
 These test the API endpoints and the database together. They are written in the `app.test.js` file and use the `supertest` package to make requests to the server and check the responses.
@@ -116,8 +118,8 @@ These are ways of saying the same thing. In some cases one is easier and more re
 | <img src="howToImages/testResult.png" alt="test result example" width="500" /> |
 | ----------------------------------------------------------------------------------------------------------------- |
 
-This shows the results of the tests in the terminal when run with `--watchAll`.
+This shows the results of the tests in the terminal.
 
-Although there are 66 tests in this case, many are duplicated in their functionality to demonstrate different ways of doing the same thing which should not be done in a real world scenario.
+Although there are 100 tests in this case, many are duplicated in their functionality to demonstrate different ways of doing the same thing which should not be done in a real world scenario.
 
 [Return to the README file](../README.md)
