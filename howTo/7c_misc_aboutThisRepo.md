@@ -1,11 +1,19 @@
 # About this repository
 
-This repository is a dual app/guide to create a simple API with a MongoDB database. It uses a `todo` API as its basis but its principles are applicable to any API usage. Its primary use intention is as a guide to creating the API and an explanation of the steps and so for the sake of brevity, please see [about this repository]() for more detail, or [running this API]() for info on how to actually run the included Express server. Otherwise, the following chapters are for building your own server.
-ALL THE ABOVE IS FROM THE README - WHAT ELSE NEEDS TO BE SAID?
-
-
-ALL THE BELOW IS CUT FROM THE OLD README - WHAT IS RELEVANT?
-- This project is simply to outline the processes involved in setting up an Express API with a MongoDB Atlas database.
-- This example uses `todos` but the principle is the same for any API.
-- Code files included are purely intended as an example of the instructions provided in this README.md file and the accompanying markdown instruction files in [howTo](howTo).
+- This project is a guide to building an API with a MongoDB database.
+- It provides a dual resource:
+  - A step-by-step guide to building the API including setting up the database
+  - A full example API in code
+- This project uses `todos` as its example object but the principle is the same for any RESTful API.
+- The primary purpose of this project is as a `how to` guide and this guide begins [here](1a_setUp_mongoDbDatabase.md).
+- The secondary purpose is as a working example API. To use this, see the [set up instructions](7b_misc_runningThisApi.md).
 - The order in which much of the API and database instructions are carried is largely optional. These instructions provide one possible order.
+  - Notably, `PATCH` would usually come before `DELETE` but this seems very odd to me and so I have shown `DELETE` first.
+
+## Documented limitations
+
+- This project uses `commom JS` modules and provides no examples of equivalent `ES6 modules`
+- This project uses a MongoDB Atlas database and provides no information about using a local MongoDB database
+- There is no example of authorisation or permissions in the project
+- The project uses `cors` openly so there is no cross-origin protection
+- There is no `PUT` endpoint, although the `PATCH` endpoint works fine as a `PUT` endpoint in this instance

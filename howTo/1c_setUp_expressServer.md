@@ -7,6 +7,8 @@ const express = require('express')
 
 const app = express()
 
+app.use(cors())
+
 app.use(express.json())
 
 app.get('/', (req, res, next) => {
@@ -66,6 +68,9 @@ const express = require('express')
 
 const app = express()
 // declare `app` as an instance of Express
+
+app.use(cors())
+// Uses the default CORS setting which is to enable CORS for all routes allowing access from all origins
 
 app.use(express.json())
 // use json middleware to parse incoming JSON payloads. req.body will contain the parsed JSON object

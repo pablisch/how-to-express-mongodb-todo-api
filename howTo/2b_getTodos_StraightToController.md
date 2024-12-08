@@ -65,6 +65,8 @@ const todoRoutes = require('./routes/todoRoutes')
 
 const app = express()
 
+app.use(cors())
+
 app.use(express.json())
 
 app.use('/todos', todoRoutes)
@@ -89,6 +91,8 @@ const todoRoutes = require('./routes/todoRoutes')
 const cors = require('cors')
 
 const app = express()
+
+app.use(cors())
 
 app.use(express.json())
 
