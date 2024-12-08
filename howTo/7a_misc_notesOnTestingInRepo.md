@@ -2,9 +2,7 @@
 
 [Return to the README file](../README.md)
 
-EVERYTHING BELOW IS CUT FROM THE ORIGINAL README - CULL, EDIT, ADD
-
-### Integration Tests
+## Integration Tests
 
 These test the API endpoints and the database together. They are written in the `app.test.js` file and use the `supertest` package to make requests to the server and check the responses.
 
@@ -14,7 +12,7 @@ Example:
 const response = await request(app).post('/todos').send({ task })
 ```
 
-Here, `request(app)` is a function from `supertest` that makes a request to the server and `.post('/todos')` is the type of request and the endpoint. `.send({ task })` is the data being sent with the request.
+Here, `request(app)` is a function from `supertest` that makes a request to the server. `.post('/todos')` is the type of request and the endpoint. `.send({ task })` is the data being sent with the request.
 
 In the `response` object, you can check the status code and the body of the response, e.g.
 
@@ -25,7 +23,7 @@ expect(response.body[0].task).toBe(task)
 expect(response.body[0].completed).toBe(completed)
 ```
 
-### Controller Function Unit Tests
+## Controller Function Unit Tests
 
 These test the controller functions in isolation and use `Jest` to mock the `req` and `res` objects, and the `next` function.
 
@@ -57,7 +55,7 @@ In the assertions, there are two principle approaches.
 - Assert a method `toHaveBeenCalledWith` a specific parameter.
 - Assert the value of an argument of a call in the `mock.calls` array.
 
-#### The `toHaveBeenCalledWith` approach
+### The `toHaveBeenCalledWith` approach
 
 Given the controller function code:
 
@@ -91,6 +89,8 @@ expect(mRes.json).toHaveBeenCalledWith([
 ])
 ```
 
+### The `mock.calls` approach
+
 But, we can also assert:
 
 ```javascript
@@ -111,9 +111,10 @@ expect(mRes.json.mock.calls[0][0][0].completed).toBe(true)
 
 These are ways of saying the same thing. In some cases one is easier and more readable than others.
 
-### Test results
+## Test results
 
-<img src="./images/express-test.png" alt="home screen" width="500" />
+| <img src="howToImages/testResult.png" alt="test result example" width="500" /> |
+| ----------------------------------------------------------------------------------------------------------------- |
 
 This shows the results of the tests in the terminal when run with `--watchAll`.
 
