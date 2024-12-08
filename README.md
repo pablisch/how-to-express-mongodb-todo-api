@@ -53,3 +53,4 @@ This repository is a dual app/guide to create a simple API with a MongoDB databa
 
 1. [About this repository](howTo/7c_misc_aboutThisRepo.md)
 2. [Notes on testing in this repository](howTo/7a_misc_notesOnTestingInRepo.md)
+3. [Running this example API](howTo/7b_misc_runningThisApi.md)
