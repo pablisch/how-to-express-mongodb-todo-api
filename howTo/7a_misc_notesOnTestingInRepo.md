@@ -1,5 +1,7 @@
 # Notes on the Tests in this Repo
 
+[Return to the README file](../README.md)
+
 EVERYTHING BELOW IS CUT FROM THE ORIGINAL README - CULL, EDIT, ADD
 
 ### Integration Tests
@@ -116,3 +118,5 @@ These are ways of saying the same thing. In some cases one is easier and more re
 This shows the results of the tests in the terminal when run with `--watchAll`.
 
 Although there are 66 tests in this case, many are duplicated in their functionality to demonstrate different ways of doing the same thing which should not be done in a real world scenario.
+
+[Return to the README file](../README.md)

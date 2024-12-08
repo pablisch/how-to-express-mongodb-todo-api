@@ -19,3 +19,5 @@
 - Use a tool like Postman to make requests to the API.
 - If available, `https://localhost-client.onrender.com/` can be used as a basic example client for use with this API.
 - Run `npm test` to run the tests.
+
+[Return to the README file](../README.md)
